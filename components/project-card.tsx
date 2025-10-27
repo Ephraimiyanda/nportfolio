@@ -18,7 +18,7 @@ export function ProjectCard({
     <Card
       isBlurred
       shadow="none"
-      className="border-black/10 dark:border-white/15 border-[0.5px] bg-default-100/10 h-full sm:max-h-[350px]"
+      className="border-black/10 dark:border-white/15 border-[0.5px] bg-default-100/10 h-full sm:max-h-[350px] w-full"
       as={Link}
       href={liveLink}
       target="_blank"
