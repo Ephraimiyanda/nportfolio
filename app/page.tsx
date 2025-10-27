@@ -35,24 +35,37 @@ export default function Home() {
     //@ts-ignore
     while ((node = walker.nextNode())) textNodes.push(node);
 
-    // Wrap each letter of text nodes in a span for animation
+    // Wrap each word, then each letter inside it
     textNodes.forEach((textNode) => {
       const text = textNode.textContent || "";
       const fragment = document.createDocumentFragment();
 
-      text.split("").forEach((char) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        span.style.display = "inline-block";
-        if (char === " ") span.style.width = "0.3em";
-        fragment.appendChild(span);
+      text.split(/(\s+)/).forEach((word) => {
+        if (word.trim() === "") {
+          // Keep whitespace as-is (so wrapping can happen)
+          fragment.appendChild(document.createTextNode(word));
+          return;
+        }
+
+        const wordSpan = document.createElement("span");
+        wordSpan.style.display = "inline-block"; // allows word spacing
+        wordSpan.style.whiteSpace = "pre"; // keep spaces in word
+
+        word.split("").forEach((char) => {
+          const charSpan = document.createElement("span");
+          charSpan.textContent = char;
+          charSpan.style.display = "inline-block"; // animateable
+          wordSpan.appendChild(charSpan);
+        });
+
+        fragment.appendChild(wordSpan);
       });
 
       textNode.parentNode?.replaceChild(fragment, textNode);
     });
 
-    // Animate all letter spans within textRef
-    const letters = introTextRef.current.querySelectorAll("span");
+    // Animate all letter spans
+    const letters = introTextRef.current.querySelectorAll("span > span");
 
     gsap.fromTo(
       letters,

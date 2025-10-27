@@ -89,7 +89,7 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className=" basis-1 pl-4" justify="end">
-        <NavbarItem className="flex gap-2">
+        <NavbarItem className="sm:flex gap-2 hidden justify-center items-center">
           <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
             <TwitterIcon className="text-default-500" />
           </Link>
@@ -103,15 +103,17 @@ export const Navbar = () => {
           <Link isExternal aria-label="Github" href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
           </Link>
+        </NavbarItem>
+        <NavbarItem className="flex justify-center items-center">
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="md:hidden flex">
+        <NavbarItem className="md:hidden flex gap-2">
           <NavbarMenuToggle />
         </NavbarItem>
       </NavbarContent>
 
       <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2 mb-4">
+        <div className="mx-4 mt-2 flex flex-col gap-2 mb-4 justify-center items-center text-center">
           {siteConfig.navItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link color={"foreground"} href="#" size="lg">
@@ -121,7 +123,7 @@ export const Navbar = () => {
           ))}
         </div>
         <NavbarMenuItem>
-          <div className="flex items-start gap-4 justify-normal">
+          <div className="flex items-start gap-4 justify-center">
             <Button
               as={Link}
               href="mailto:iyandaephraim@gmail.com"
@@ -142,6 +144,30 @@ export const Navbar = () => {
             </Button>
           </div>
         </NavbarMenuItem>
+        <NavbarItem className="flex flex-col gap-4">
+          <p className="py-2 text-default-500 text-xl text-center">
+            I&apos;m on social media
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Link
+              isExternal
+              aria-label="Twitter"
+              href={siteConfig.links.twitter}
+            >
+              <TwitterIcon className="text-default-500" />
+            </Link>
+            <Link
+              isExternal
+              aria-label="LinkedIn"
+              href={siteConfig.links.linkedIn}
+            >
+              <LinkedInIcon className="text-default-500" />
+            </Link>
+            <Link isExternal aria-label="Github" href={siteConfig.links.github}>
+              <GithubIcon className="text-default-500" />
+            </Link>
+          </div>
+        </NavbarItem>
       </NavbarMenu>
     </HeroUINavbar>
   );
