@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
-
+import { Roboto } from "next/font/google";
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
@@ -10,7 +10,11 @@ import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import SEO from "@/components/seo";
-
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -40,7 +44,8 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background h-full overflow-auto font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
+          roboto.className
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>

@@ -32,20 +32,24 @@ const experiences = [
 export default function ExperienceTimeline() {
   return (
     <div className="">
-      <ul className="flex flex-col gap-4 relative">
+      <ul className="flex flex-col relative [&>li]:border-b-[0.5px] [&>li]:last:border-none">
         {experiences.map((exp, i) => (
           <li
             key={i}
-            className="relative flex justify-between py-2 items-center border-b-[0.5px] border-black/10 dark:border-white/15"
+            className="relative py-6 border-black/10 dark:border-white/15 "
           >
-            <div className="flex flex-col gap-2">
-              <h3 className="text-base font-semibold text-gray-800 dark:text-white">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 w-full">
+              <div className="flex-1">
+                <p className="text-base font-medium  text-default-500 ">
+                  {exp.date}
+                </p>
+              </div>
+              <p className="text-3xl font-medium text-gray-800 dark:text-white flex-1 md:text-center text-left uppercase">
                 {exp.role}
-              </h3>
-              <p className="text-sm">{exp.company}</p>
-            </div>
-            <div>
-              <p className="text-sm text-default-500">{exp.date}</p>
+              </p>
+              <p className="text-base flex-1 md:text-right text-left font-medium ">
+                {exp.company}
+              </p>
             </div>
           </li>
         ))}

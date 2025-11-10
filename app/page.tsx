@@ -178,10 +178,8 @@ export default function Home() {
                 , a passionate{" "}
                 <span className="text-black dark:text-white">
                   Frontend Developer
-                </span>
-                <br />
-                driven by clean, modern UI and a love of web animations.
-                <br />I build{" "}
+                </span>{" "}
+                driven by clean, modern UI and a love of web animations. I build{" "}
                 <span className="text-black dark:text-white">
                   performant, visually-stunning
                 </span>{" "}
@@ -248,10 +246,10 @@ export default function Home() {
             <div className="flex justify-between flex-col gap-4 sm:w-1/2">
               <div ref={aboutTextRef} className="flex flex-col gap-4 w-full">
                 <p className="text-default-500 text-xl">
-                  Once I started coding, the fascination of being able to create
-                  things piqued my interest. I realised I could just do things.
-                  That idea became the inspiration that’s carried me through my
-                  web development career.
+                  The fascination of being able to create things through coding
+                  piqued my interest. I realised I could just do things. That
+                  idea became the inspiration that’s carried me through my web
+                  development career.
                 </p>
                 <p className="text-default-500 text-xl">
                   When I&apos;m not coding, you can find me on the basketball
