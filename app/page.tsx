@@ -12,6 +12,7 @@ import { PiReadCvLogo } from "react-icons/pi";
 import { Image } from "@heroui/image";
 import Link from "next/link";
 import { GoArrowUpRight } from "react-icons/go";
+import WelcomeLoader from "@/components/welcomeScreen";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -162,6 +163,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 w-full">
+      <WelcomeLoader />
       {/* Intro section */}
       <section className="w-full py-2">
         <h1>
@@ -191,7 +193,7 @@ export default function Home() {
       </section>
 
       {/* Project section */}
-      <section className="w-full py-4 sm:py-6">
+      <section id="projects" className="w-full py-4 sm:py-6">
         <h2 className="text-2xl font-bold py-4 mb-8">Projects_</h2>
         <div
           ref={projectCardsRef}
@@ -210,15 +212,18 @@ export default function Home() {
       </section>
 
       {/* Skills section */}
-      <section className="w-full py-4 sm:py-6">
+      <section id="skills" className="w-full py-4 sm:py-6">
         <h3 className="text-2xl font-bold py-4 mb-8">Stack_</h3>
-        <ul ref={stackListRef} className="flex flex-col gap-4">
+        <ul
+          ref={stackListRef}
+          className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-8"
+        >
           {siteConfig.skills.technicalSkills.map(
             (skill) =>
               skill && (
                 <li
                   key={skill.name}
-                  className="flex justify-normal items-center gap-4"
+                  className="flex justify-normal items-center gap-4 sm:gap-3"
                 >
                   <SimpleIcon
                     iconName={skill.icon}
@@ -233,7 +238,7 @@ export default function Home() {
       </section>
 
       {/* About section */}
-      <section className="w-full py-4 sm:py-6">
+      <section id="about" className="w-full py-4 sm:py-6">
         <h3 className="text-2xl font-bold py-4 mb-8">My Story_</h3>
         <div className="flex flex-col gap-4">
           <div className="flex justify-normal gap-10 flex-col md:flex-row">
@@ -243,7 +248,7 @@ export default function Home() {
               radius="none"
               alt="about image"
             />
-            <div className="flex justify-between flex-col gap-4 sm:w-1/2">
+            <div className="flex justify-between flex-col gap-4 md:w-1/2">
               <div ref={aboutTextRef} className="flex flex-col gap-4 w-full">
                 <p className="text-default-500 text-xl">
                   The fascination of being able to create things through coding
@@ -292,7 +297,7 @@ export default function Home() {
       </section>
 
       {/* Contact section */}
-      <section className="w-full py-4 sm:py-6 mb-10">
+      <section id="contact" className="w-full py-4 sm:py-6 mb-10">
         <h5 className="text-2xl text-center font-bold py-4 mb-4">
           Want to talk?
         </h5>

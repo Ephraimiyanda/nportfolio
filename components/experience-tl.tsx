@@ -40,7 +40,7 @@ export default function ExperienceTimeline() {
           >
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 w-full">
               <div className="flex-1">
-                <p className="text-base font-medium  text-default-500 ">
+                <p className="text-base font-medium  text-default-500 uppercase">
                   {exp.date}
                 </p>
               </div>

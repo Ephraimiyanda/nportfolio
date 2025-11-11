@@ -51,20 +51,23 @@ export const Navbar = () => {
   return (
     <HeroUINavbar
       maxWidth="xl"
-      position="sticky"
       isBordered
       isBlurred
-      className="z-100"
+      className="z-100 fixed top-[0]"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             <User
               avatarProps={{
-                src: siteConfig.profileImg,
+                src: "/icon.png",
+              }}
+              classNames={{
+                name: "uppercase font-medium text-foreground",
+                description: "uppercase text-default-500",
               }}
               description="Frontend developer"
-              name="Ephraim  Iyanda"
+              name="Ephraim Iyanda"
             />
           </NextLink>
         </NavbarBrand>
@@ -76,7 +79,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  "data-[active=true]:text-primary data-[active=true]:font-medium uppercase font-medium hover:text-white"
                 )}
                 color="foreground"
                 href={item.href}
@@ -91,17 +94,17 @@ export const Navbar = () => {
       <NavbarContent className=" basis-1 pl-4" justify="end">
         <NavbarItem className="sm:flex gap-2 hidden justify-center items-center">
           <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-            <TwitterIcon className="text-default-500" />
+            <TwitterIcon className="text-foreground" />
           </Link>
           <Link
             isExternal
             aria-label="LinkedIn"
             href={siteConfig.links.linkedIn}
           >
-            <LinkedInIcon className="text-default-500" />
+            <LinkedInIcon className="text-foreground" />
           </Link>
           <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-            <GithubIcon className="text-default-500" />
+            <GithubIcon className="text-foreground" />
           </Link>
         </NavbarItem>
         <NavbarItem className="flex justify-center items-center">
@@ -111,10 +114,15 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2 mb-4 justify-center items-center text-center">
+        <div className="mx-4 mt-2 flex flex-col gap-4 mb-4 justify-center items-center text-center">
           {siteConfig.navItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color={"foreground"} href="#" size="lg">
+              <Link
+                color={"foreground"}
+                href="#"
+                size="lg"
+                className="uppercase font-medium text-2xl hover:text-white"
+              >
                 {item.label}
               </Link>
             </NavbarMenuItem>

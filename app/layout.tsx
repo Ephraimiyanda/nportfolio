@@ -11,7 +11,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import SEO from "@/components/seo";
 const roboto = Roboto({
-  weight: "400",
+  weight: "500",
   subsets: ["latin"],
   display: "swap",
 });
@@ -44,7 +44,6 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background h-full overflow-auto font-sans antialiased",
-          fontSans.variable,
           roboto.className
         )}
       >

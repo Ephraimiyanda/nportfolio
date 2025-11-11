@@ -101,7 +101,7 @@ export const siteConfig = {
         "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1760830149/zki7zgisuu2jtx3iggmv.png",
     },
     {
-      name: "Moveibox",
+      name: "Moviebox",
       description:
         "A digital platform for discovering movies and information about the movies",
       liveLink: "https://ephraim-moviebox.netlify.app/",

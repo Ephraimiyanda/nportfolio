@@ -22,10 +22,7 @@ export default function SEO() {
         property="og:description"
         content="Portfolio of Ephraim Iyanda — Frontend Developer focused on creating clean, interactive, and performant web interfaces."
       />
-      <meta
-        property="og:image"
-        content="https://res.cloudinary.com/dg0kdnwt1/image/upload/v1761279203/bdfipp6dcuptjf5sjtrt.jpg"
-      />
+      <meta property="og:image" content="/icon.png" />
       <meta property="og:url" content="https://ephraimiyanda.vercel.app" />
       <meta property="og:type" content="website" />
 
@@ -39,10 +36,7 @@ export default function SEO() {
         name="twitter:description"
         content="Frontend Developer crafting delightful, fast, and responsive web experiences."
       />
-      <meta
-        name="twitter:image"
-        content="https://res.cloudinary.com/dg0kdnwt1/image/upload/v1761279203/bdfipp6dcuptjf5sjtrt.jpg"
-      />
+      <meta name="twitter:image" content="/icon.png" />
 
       <link rel="icon" href="/icon.png" />
     </Head>
