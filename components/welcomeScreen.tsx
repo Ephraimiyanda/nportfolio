@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 export default function WelcomeLoader() {
@@ -7,7 +7,7 @@ export default function WelcomeLoader() {
   const loaderRef = useRef(null);
   const lettersRef = useRef<any>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const loader = loaderRef.current;
     const letters = lettersRef.current;
 
