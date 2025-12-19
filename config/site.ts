@@ -57,9 +57,18 @@ export const siteConfig = {
   },
   projects: [
     {
+      name: "Z-store",
+      description:
+        "An e-commerce platform which creativity with craftsmanshipcreates fashion that transcends trends and stands the test of time",
+      liveLink: "https://https://z-stores.vercel.app/",
+      sourceLink: "https://github.com/Ephraimiyanda/z-store",
+      imageUrl:
+        "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1766180153/lfxxusljpfnb0gfki3eh.png",
+    },
+    {
       name: "Realswitch",
       description:
-        "A real estate maeketplace for buying, renting and selling homes",
+        "A real estate marketplace for buying, renting and selling homes",
       liveLink: "https://realswitch.netlify.app/",
       sourceLink: "https://github.com/Ephraimiyanda/Real-estate",
       imageUrl:
@@ -99,15 +108,6 @@ export const siteConfig = {
       sourceLink: "https://github.com/Ephraimiyanda/evently",
       imageUrl:
         "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1760830149/zki7zgisuu2jtx3iggmv.png",
-    },
-    {
-      name: "Moviebox",
-      description:
-        "A digital platform for discovering movies and information about the movies",
-      liveLink: "https://ephraim-moviebox.netlify.app/",
-      sourceLink: "https://github.com/Ephraimiyanda/hng-internship-stage-2",
-      imageUrl:
-        "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1760830174/h62jkyqozjrzesmaf0w2.png",
     },
   ],
   aboutImg:
