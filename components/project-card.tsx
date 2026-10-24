@@ -19,37 +19,36 @@ export function ProjectCard({
 }) {
   return (
     <Card
-      isBlurred
       as={Link}
       className={clsx(
-        "border-black/10 dark:border-white/15 border-[0.5px] bg-default-100/10 h-full sm:max-h-[350px] w-full",
+        "h-full w-full border-[0.5px] border-black/10 bg-default-100/10 dark:border-white/15",
         className,
       )}
       href={liveLink}
       shadow="none"
       target="_blank"
     >
-      <CardBody className="overflow-visible p-0">
+      <CardBody className="shrink-0 overflow-visible p-0">
         <Image
           alt={`${name} preview`}
-          className="w-full object-cover h-[220px] rounded-t-lg"
+          className="h-[220px] w-full rounded-t-lg object-cover"
           radius="none"
           src={imgUrl}
           width="100%"
         />
       </CardBody>
-      <CardFooter className="flex flex-col gap-2 py-4 px-4 sm:px-6 text-left dark:bg-default-100/30 justify-normal items-start border-t-[0.5px] border-black/10 dark:border-white/15 h-full">
-        <div className="flex justify-between  w-full items-center">
+      <CardFooter className="flex h-auto flex-col items-start justify-normal gap-2 border-t-[0.5px] border-black/10 px-4 py-4 text-left dark:border-white/15 dark:bg-default-100/30 sm:px-6">
+        <div className="flex w-full items-center justify-between gap-3">
           <span className="font-bold text-lg">{name}</span>
           <Button
+            className="shrink-0 rounded-full border-[0.5px] border-black/10 px-4 text-base transition-[box-shadow] duration-250 ease-in-out hover:shadow-sm hover:shadow-black/30 dark:border-white/15 dark:hover:shadow-white/40"
             variant="bordered"
-            className=" px-4 border-black/10 dark:border-white/15 border-[0.5px] rounded-full text-base  dark:hover:shadow-white/40 hover:shadow-black/30 hover:shadow-sm ease-in-out transition-all duration-250"
           >
             View
           </Button>
         </div>
 
-        <p className="text-default-500">{description}</p>
+        <p className="w-full break-words text-default-500">{description}</p>
       </CardFooter>
     </Card>
   );

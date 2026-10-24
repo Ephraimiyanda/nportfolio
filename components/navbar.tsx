@@ -50,10 +50,10 @@ export const Navbar = () => {
 
   return (
     <HeroUINavbar
-      maxWidth="xl"
+      isBlurred={false}
       isBordered
-      isBlurred
-      className="z-100 fixed top-[0]"
+      className="fixed top-0 z-100 bg-background"
+      maxWidth="xl"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
@@ -79,7 +79,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium uppercase font-medium hover:text-white"
+                  "data-[active=true]:text-primary data-[active=true]:font-medium uppercase font-medium hover:text-white",
                 )}
                 color="foreground"
                 href={item.href}

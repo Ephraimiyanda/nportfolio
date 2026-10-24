@@ -59,7 +59,7 @@ export const siteConfig = {
     {
       name: "Z-store",
       description:
-        "An e-commerce platform which creativity with craftsmanshipcreates fashion that transcends trends and stands the test of time",
+        "An e-commerce platform which creativity with craftsmanship creates fashion that transcends trends and stands the test of time",
       liveLink: "https://z-stores.vercel.app/",
       sourceLink: "https://github.com/Ephraimiyanda/z-store",
       imageUrl:
