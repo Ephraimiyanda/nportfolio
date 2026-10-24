@@ -44,9 +44,13 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background h-full overflow-auto font-sans antialiased",
-          roboto.className
+          roboto.className,
         )}
       >
+        <style>{`@media (prefers-reduced-motion:no-preference){.intro-char,.reveal-item{opacity:0}}`}</style>
+        <noscript>
+          <style>{".intro-char,.reveal-item{opacity:1}"}</style>
+        </noscript>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col">
             <SEO />

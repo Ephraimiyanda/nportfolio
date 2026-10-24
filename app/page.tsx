@@ -1,304 +1,311 @@
 "use client";
-import { useEffect, useRef } from "react";
+
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { siteConfig } from "@/config/site";
-import { ProjectCard } from "@/components/project-card";
-import { SimpleIcon } from "@/components/icons";
-import { ContactForm } from "@/components/contact-form";
-import ExperienceTimeline from "@/components/experience-tl";
 import { Button } from "@heroui/button";
-import { PiReadCvLogo } from "react-icons/pi";
 import { Image } from "@heroui/image";
 import Link from "next/link";
 import { GoArrowUpRight } from "react-icons/go";
-import WelcomeLoader from "@/components/welcomeScreen";
+import { PiReadCvLogo } from "react-icons/pi";
+
+import { ContactForm } from "@/components/contact-form";
+import ExperienceTimeline from "@/components/experience-tl";
+import { SimpleIcon } from "@/components/icons";
+import { ProjectCard } from "@/components/project-card";
+import { siteConfig } from "@/config/site";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const useIsoLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
+
+const outlineButtonClass =
+  "reveal-item rounded-full border-[0.5px] border-black/10 px-4 py-6 text-base transition-[box-shadow,border-color,background-color] duration-250 ease-in-out hover:shadow-sm hover:shadow-black/30 sm:px-6 sm:text-lg dark:border-white/15 dark:hover:shadow-white/40";
+
+const introParts: Array<{ text: string; accent?: boolean }> = [
+  { text: "I'm " },
+  { text: "Ephraim Iyanda", accent: true },
+  { text: ", a passionate " },
+  { text: "Frontend Developer", accent: true },
+  {
+    text: " driven by clean, modern UI and a love of web animations. I build ",
+  },
+  { text: "performant, visually-stunning", accent: true },
+  { text: " interfaces." },
+];
+
+function IntroCopy() {
+  return introParts.flatMap((part, partIndex) =>
+    part.text.split(/(\s+)/).map((token, tokenIndex) => {
+      const key = `${partIndex}-${tokenIndex}`;
+
+      if (!token.trim()) {
+        return <span key={key}>{token}</span>;
+      }
+
+      return (
+        <span
+          key={key}
+          className={
+            part.accent
+              ? "inline-block whitespace-nowrap text-black dark:text-white"
+              : "inline-block whitespace-nowrap"
+          }
+        >
+          {Array.from(token).map((char, charIndex) => (
+            <span key={charIndex} className="intro-char inline-block">
+              {char}
+            </span>
+          ))}
+        </span>
+      );
+    }),
+  );
+}
+
+function reveal(
+  targets: gsap.TweenTarget,
+  {
+    trigger,
+    start,
+    from,
+    to,
+  }: {
+    trigger: Element;
+    start: string;
+    from?: gsap.TweenVars;
+    to?: gsap.TweenVars;
+  },
+) {
+  gsap.fromTo(
+    targets,
+    { opacity: 0, ...from },
+    {
+      opacity: 1,
+      duration: 0.8,
+      ease: "power3.out",
+      ...to,
+      scrollTrigger: {
+        trigger,
+        start,
+        once: true,
+      },
+      // Drop the resting transform so type stays sharp after the move.
+      onComplete: () => {
+        gsap.set(targets, { clearProps: "transform" });
+      },
+    },
+  );
+}
+
 export default function Home() {
-  const introTextRef = useRef<HTMLParagraphElement | null>(null);
-  const aboutTextRef = useRef<HTMLDivElement | null>(null);
-  const projectCardsRef = useRef<HTMLDivElement | null>(null);
-  const stackListRef = useRef<HTMLUListElement | null>(null);
-  const aboutButtonsRef = useRef<HTMLDivElement | null>(null);
+  const introRef = useRef<HTMLHeadingElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const stackRef = useRef<HTMLUListElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const aboutActionsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!introTextRef.current) return;
+  useIsoLayoutEffect(() => {
+    let alive = true;
+    const motion = gsap.matchMedia();
+    const reduced = "(prefers-reduced-motion: no-preference)";
 
-    // Select only text nodes (not existing <span> tags)
-    const textNodes: ChildNode[] = [];
-    const walker = document.createTreeWalker(
-      introTextRef.current,
-      NodeFilter.SHOW_TEXT
-    );
-    let node: Node | null;
-    //@ts-ignore
-    while ((node = walker.nextNode())) textNodes.push(node);
+    motion.add(reduced, () => {
+      const intro = introRef.current;
 
-    // Wrap each word, then each letter inside it
-    textNodes.forEach((textNode) => {
-      const text = textNode.textContent || "";
-      const fragment = document.createDocumentFragment();
+      if (!intro) return;
 
-      text.split(/(\s+)/).forEach((word) => {
-        if (word.trim() === "") {
-          // Keep whitespace as-is (so wrapping can happen)
-          fragment.appendChild(document.createTextNode(word));
-          return;
-        }
-
-        const wordSpan = document.createElement("span");
-        wordSpan.style.display = "inline-block"; // allows word spacing
-        wordSpan.style.whiteSpace = "pre"; // keep spaces in word
-
-        word.split("").forEach((char) => {
-          const charSpan = document.createElement("span");
-          charSpan.textContent = char;
-          charSpan.style.display = "inline-block"; // animateable
-          wordSpan.appendChild(charSpan);
-        });
-
-        fragment.appendChild(wordSpan);
+      reveal(intro.querySelectorAll(".intro-char"), {
+        trigger: intro,
+        start: "top 90%",
+        from: { y: 18 },
+        to: {
+          y: 0,
+          duration: 0.55,
+          ease: "power4.out",
+          stagger: 0.012,
+        },
       });
-
-      textNode.parentNode?.replaceChild(fragment, textNode);
     });
 
-    // Animate all letter spans
-    const letters = introTextRef.current.querySelectorAll("span > span");
+    // Measure scroll triggers after images load, so they don't fire early.
+    const armScrollReveals = () => {
+      if (!alive) return;
 
-    gsap.fromTo(
-      letters,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.3,
-        stagger: 0.02,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: introTextRef.current,
-          start: "top 80%",
-        },
-      }
-    );
+      motion.add(reduced, () => {
+        const projects = projectsRef.current;
+        const stack = stackRef.current;
+        const about = aboutRef.current;
+        const actions = aboutActionsRef.current;
 
-    // About Text Stagger (on scroll)
-    if (aboutTextRef.current) {
-      const paragraphs = aboutTextRef.current.querySelectorAll("p");
-      gsap.fromTo(
-        paragraphs,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.25,
-          scrollTrigger: {
-            trigger: aboutTextRef.current,
-            start: "top 85%",
-          },
+        if (projects?.children.length) {
+          reveal(projects.children, {
+            trigger: projects,
+            start: "top 75%",
+            from: { y: 36 },
+            to: { y: 0, duration: 0.9, stagger: 0.12 },
+          });
         }
-      );
-    }
-    // Project cards scroll animation
-    if (projectCardsRef.current) {
-      gsap.fromTo(
-        projectCardsRef.current.children,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power2.out",
-          stagger: 0.25,
-          scrollTrigger: {
-            trigger: projectCardsRef.current,
-            start: "top 85%",
-          },
-        }
-      );
-    }
 
-    // Stack list stagger animation
-    if (stackListRef.current) {
-      gsap.fromTo(
-        stackListRef.current.children,
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power2.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: stackListRef.current,
-            start: "top 85%",
-          },
+        if (stack?.children.length) {
+          reveal(stack.children, {
+            trigger: stack,
+            start: "top 75%",
+            from: { x: -20 },
+            to: { x: 0, duration: 0.65, stagger: 0.06 },
+          });
         }
-      );
+
+        if (about) {
+          reveal(about.querySelectorAll("p"), {
+            trigger: about,
+            start: "top 75%",
+            from: { y: 24 },
+            to: { y: 0, duration: 0.9, stagger: 0.16 },
+          });
+        }
+
+        if (actions?.children.length) {
+          reveal(actions.children, {
+            trigger: actions,
+            start: "top 82%",
+            from: { y: 14, scale: 0.94 },
+            to: {
+              y: 0,
+              scale: 1,
+              duration: 0.8,
+              ease: "back.out(1.4)",
+              stagger: 0.14,
+            },
+          });
+        }
+
+        ScrollTrigger.refresh();
+      });
+    };
+
+    if (document.readyState === "complete") {
+      armScrollReveals();
+    } else {
+      window.addEventListener("load", armScrollReveals, { once: true });
     }
 
-    // About buttons fade and scale in
-    if (aboutButtonsRef.current) {
-      gsap.fromTo(
-        aboutButtonsRef.current.children,
-        { opacity: 0, scale: 0.9 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          ease: "back.out(1.7)",
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: aboutButtonsRef.current,
-            start: "top 90%",
-          },
-        }
-      );
-    }
+    return () => {
+      alive = false;
+      window.removeEventListener("load", armScrollReveals);
+      motion.revert();
+    };
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 w-full">
-      {/* <WelcomeLoader />*/}
-      {/* Intro section */}
+    <div className="flex w-full flex-col items-center justify-center gap-4 py-8 md:py-10">
       <section className="w-full py-2">
-        <h1>
-          <div className="flex justify-start w-full">
-            <div className="max-w-[43rem] w-full">
-              <p
-                ref={introTextRef}
-                className="text-2xl text-default-500 font-semibold leading-relaxed break-keep"
-              >
-                I&apos;m{" "}
-                <span className="text-black dark:text-white">
-                  Ephraim Iyanda
-                </span>
-                , a passionate{" "}
-                <span className="text-black dark:text-white">
-                  Frontend Developer
-                </span>{" "}
-                driven by clean, modern UI and a love of web animations. I build{" "}
-                <span className="text-black dark:text-white">
-                  performant, visually-stunning
-                </span>{" "}
-                interfaces.
-              </p>
-            </div>
-          </div>
+        <h1
+          ref={introRef}
+          className="max-w-[43rem] break-keep text-2xl font-semibold leading-relaxed text-default-500"
+        >
+          <IntroCopy />
         </h1>
       </section>
 
-      {/* Project section */}
-      <section id="projects" className="w-full py-4 sm:py-6">
-        <h2 className="text-2xl font-bold py-4 mb-8">Projects_</h2>
+      <section className="w-full py-4 sm:py-6" id="projects">
+        <h2 className="mb-8 py-4 text-2xl font-bold">Projects_</h2>
         <div
-          ref={projectCardsRef}
-          className="flex flex-col justify-between items-center sm:grid lg:grid-cols-3 sm:grid-cols-2 gap-4 py-2 w-full"
+          ref={projectsRef}
+          className="flex w-full flex-col items-center justify-between gap-4 py-2 sm:grid sm:grid-cols-2 lg:grid-cols-3"
         >
-          {siteConfig.projects.map((project, index) => (
+          {siteConfig.projects.map((project) => (
             <ProjectCard
-              key={index}
-              name={project.name}
-              imgUrl={project.imageUrl}
+              key={project.name}
+              className="reveal-item"
               description={project.description}
+              imgUrl={project.imageUrl}
               liveLink={project.liveLink}
+              name={project.name}
             />
           ))}
         </div>
       </section>
 
-      {/* Skills section */}
-      <section id="skills" className="w-full py-4 sm:py-6">
-        <h3 className="text-2xl font-bold py-4 mb-8">Stack_</h3>
+      <section className="w-full overflow-x-clip py-4 sm:py-6" id="skills">
+        <h3 className="mb-8 py-4 text-2xl font-bold">Stack_</h3>
         <ul
-          ref={stackListRef}
-          className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-8"
+          ref={stackRef}
+          className="flex flex-col flex-wrap gap-4 sm:flex-row sm:gap-8"
         >
-          {siteConfig.skills.technicalSkills.map(
-            (skill) =>
-              skill && (
-                <li
-                  key={skill.name}
-                  className="flex justify-normal items-center gap-4 sm:gap-3"
-                >
-                  <SimpleIcon
-                    iconName={skill.icon}
-                    size={25}
-                    color={skill.color}
-                  />
-                  <span className="text-default-500">{skill.name}</span>
-                </li>
-              )
-          )}
+          {siteConfig.skills.technicalSkills.map((skill) => (
+            <li
+              key={skill.name}
+              className="reveal-item flex items-center justify-normal gap-4 sm:gap-3"
+            >
+              <SimpleIcon color={skill.color} iconName={skill.icon} size={25} />
+              <span className="text-default-500">{skill.name}</span>
+            </li>
+          ))}
         </ul>
       </section>
 
-      {/* About section */}
-      <section id="about" className="w-full py-4 sm:py-6">
-        <h3 className="text-2xl font-bold py-4 mb-8">My Story_</h3>
+      <section className="w-full py-4 sm:py-6" id="about">
+        <h3 className="mb-8 py-4 text-2xl font-bold">My Story_</h3>
         <div className="flex flex-col gap-4">
-          <div className="flex justify-normal gap-10 flex-col md:flex-row">
+          <div className="flex flex-col justify-normal gap-10 md:flex-row">
             <Image
-              className="h-full max-h-[300px] w-[180px] float-left"
-              src={siteConfig.aboutImg}
+              alt="Ephraim Iyanda"
+              className="float-left h-full max-h-[300px] w-[180px]"
               radius="none"
-              alt="about image"
+              src={siteConfig.aboutImg}
             />
-            <div className="flex justify-between flex-col gap-4 md:w-1/2">
-              <div ref={aboutTextRef} className="flex flex-col gap-4 w-full">
-                <p className="text-default-500 text-xl">
+            <div className="flex flex-col justify-between gap-4 md:w-1/2">
+              <div ref={aboutRef} className="flex w-full flex-col gap-4">
+                <p className="reveal-item text-xl text-default-500">
                   The fascination of being able to create things through coding
                   piqued my interest. I realised I could just do things. That
                   idea became the inspiration that’s carried me through my web
                   development career.
                 </p>
-                <p className="text-default-500 text-xl">
+                <p className="reveal-item text-xl text-default-500">
                   When I&apos;m not coding, you can find me on the basketball
                   court — either watching or playing. I will break your ankle,
                   don&apos;t play with me. Arsenal for life. I also love art and
                   standup comedy.
                 </p>
               </div>
-              <div ref={aboutButtonsRef}>
-                <div className="flex items-start gap-4 justify-normal">
-                  <Button
-                    as={Link}
-                    href="mailto:iyandaephraim@gmail.com"
-                    endContent={<GoArrowUpRight size={24} />}
-                    variant="bordered"
-                    className="px-4 sm:px-6 rounded-full text-base sm:text-lg py-6 border-black/10 dark:border-white/15 border-[0.5px] dark:hover:shadow-white/40 hover:shadow-black/30 hover:shadow-sm ease-in-out transition-all duration-250"
-                  >
-                    Let’s talk
-                  </Button>
-                  <Button
-                    as={Link}
-                    endContent={<PiReadCvLogo size={24} />}
-                    href={siteConfig.resume}
-                    variant="bordered"
-                    className="px-4 sm:px-6 rounded-full text-base sm:text-lg py-6 border-black/10 dark:border-white/15 border-[0.5px] dark:hover:shadow-white/40 hover:shadow-black/30 hover:shadow-sm ease-in-out transition-all duration-250"
-                  >
-                    Download Resume
-                  </Button>
-                </div>
+              <div
+                ref={aboutActionsRef}
+                className="flex items-start justify-normal gap-4"
+              >
+                <Button
+                  as={Link}
+                  className={outlineButtonClass}
+                  endContent={<GoArrowUpRight size={24} />}
+                  href="mailto:iyandaephraim@gmail.com"
+                  variant="bordered"
+                >
+                  Let’s talk
+                </Button>
+                <Button
+                  as={Link}
+                  className={outlineButtonClass}
+                  endContent={<PiReadCvLogo size={24} />}
+                  href={siteConfig.resume}
+                  variant="bordered"
+                >
+                  Download Resume
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Experience section */}
       <section className="w-full py-4 sm:py-6">
-        <h4 className="text-2xl font-bold py-4 mb-8">Experience_</h4>
+        <h4 className="mb-8 py-4 text-2xl font-bold">Experience_</h4>
         <ExperienceTimeline />
       </section>
 
-      {/* Contact section */}
-      <section id="contact" className="w-full py-4 sm:py-6 mb-10">
-        <h5 className="text-2xl text-center font-bold py-4 mb-4">
+      <section className="mb-10 w-full py-4 sm:py-6" id="contact">
+        <h5 className="mb-4 py-4 text-center text-2xl font-bold">
           Want to talk?
         </h5>
         <ContactForm />
