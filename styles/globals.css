@@ -18,12 +18,10 @@
   visibility: visible;
 }
 
-/* Stay invisible until GSAP sets inline opacity, so copy never flashes fully drawn. */
-@media (prefers-reduced-motion: no-preference) {
-  .intro-char,
-  .reveal-item {
-    opacity: 0;
-  }
+/* Hidden only until GSAP takes over, so the entrance can run instead of staying at 0. */
+html:not(.gsap-ready) .intro-char,
+html:not(.gsap-ready) .reveal-item {
+  opacity: 0;
 }
 
 @keyframes bg-animation {
