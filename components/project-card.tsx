@@ -1,6 +1,7 @@
 import { Button } from "@heroui/button";
 import { Card, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
+import clsx from "clsx";
 import Link from "next/link";
 
 export function ProjectCard({
@@ -8,32 +9,36 @@ export function ProjectCard({
   name,
   description,
   liveLink,
+  className,
 }: {
   imgUrl: string;
   name: string;
   description: string;
   liveLink: string;
+  className?: string;
 }) {
   return (
     <Card
       isBlurred
-      shadow="none"
-      className="border-black/10 dark:border-white/15 border-[0.5px] bg-default-100/10 h-full sm:max-h-[350px] w-full"
       as={Link}
+      className={clsx(
+        "border-black/10 dark:border-white/15 border-[0.5px] bg-default-100/10 h-full sm:max-h-[350px] w-full",
+        className,
+      )}
       href={liveLink}
+      shadow="none"
       target="_blank"
     >
       <CardBody className="overflow-visible p-0">
         <Image
-          radius="none"
-          alt={"card image"}
+          alt={`${name} preview`}
           className="w-full object-cover h-[220px] rounded-t-lg"
+          radius="none"
           src={imgUrl}
           width="100%"
         />
       </CardBody>
       <CardFooter className="flex flex-col gap-2 py-4 px-4 sm:px-6 text-left dark:bg-default-100/30 justify-normal items-start border-t-[0.5px] border-black/10 dark:border-white/15 h-full">
-        {/* <Link href={liveLink}></Link> */}
         <div className="flex justify-between  w-full items-center">
           <span className="font-bold text-lg">{name}</span>
           <Button

@@ -18,6 +18,14 @@
   visibility: visible;
 }
 
+/* Stay invisible until GSAP sets inline opacity, so copy never flashes fully drawn. */
+@media (prefers-reduced-motion: no-preference) {
+  .intro-char,
+  .reveal-item {
+    opacity: 0;
+  }
+}
+
 @keyframes bg-animation {
   0% {
     transform: translate(0, 0);
