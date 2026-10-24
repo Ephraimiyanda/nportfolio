@@ -88,9 +88,10 @@ function reveal(
         trigger,
         start,
         toggleActions: "play none none none",
+        once: true,
       },
       onComplete: () => {
-        gsap.set(targets, { clearProps: "transform" });
+        gsap.set(targets, { clearProps: "transform,willChange" });
       },
     },
   );
@@ -205,7 +206,7 @@ export default function Home() {
         <h2 className="mb-8 py-4 text-2xl font-bold">Projects_</h2>
         <div
           ref={projectsRef}
-          className="flex w-full flex-col items-center justify-between gap-4 py-2 sm:grid sm:grid-cols-2 lg:grid-cols-3"
+          className="grid w-full grid-cols-1 items-stretch gap-4 py-2 sm:grid-cols-2 lg:grid-cols-3"
         >
           {siteConfig.projects.map((project) => (
             <ProjectCard
@@ -220,7 +221,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full overflow-x-clip py-4 sm:py-6" id="skills">
+      <section className="w-full py-4 sm:py-6" id="skills">
         <h3 className="mb-8 py-4 text-2xl font-bold">Stack_</h3>
         <ul
           ref={stackRef}

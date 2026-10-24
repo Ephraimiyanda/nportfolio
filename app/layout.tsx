@@ -43,7 +43,7 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen text-foreground bg-background h-full overflow-auto font-sans antialiased",
+          "min-h-screen bg-background font-sans text-foreground antialiased",
           roboto.className,
         )}
       >
