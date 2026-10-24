@@ -83,15 +83,12 @@ function reveal(
     { opacity: 0, ...from },
     {
       opacity: 1,
-      duration: 0.8,
-      ease: "power3.out",
       ...to,
       scrollTrigger: {
         trigger,
         start,
-        once: true,
+        toggleActions: "play none none none",
       },
-      // Drop the resting transform so type stays sharp after the move.
       onComplete: () => {
         gsap.set(targets, { clearProps: "transform" });
       },
@@ -107,94 +104,89 @@ export default function Home() {
   const aboutActionsRef = useRef<HTMLDivElement>(null);
 
   useIsoLayoutEffect(() => {
-    let alive = true;
-    const motion = gsap.matchMedia();
-    const reduced = "(prefers-reduced-motion: no-preference)";
-
-    motion.add(reduced, () => {
+    const ctx = gsap.context(() => {
       const intro = introRef.current;
+      const projects = projectsRef.current;
+      const stack = stackRef.current;
+      const about = aboutRef.current;
+      const actions = aboutActionsRef.current;
 
-      if (!intro) return;
+      if (intro) {
+        reveal(intro.querySelectorAll(".intro-char"), {
+          trigger: intro,
+          start: "top 80%",
+          from: { y: 20 },
+          to: {
+            y: 0,
+            duration: 0.3,
+            stagger: 0.02,
+            ease: "power2.out",
+          },
+        });
+      }
 
-      reveal(intro.querySelectorAll(".intro-char"), {
-        trigger: intro,
-        start: "top 90%",
-        from: { y: 18 },
-        to: {
-          y: 0,
-          duration: 0.55,
-          ease: "power4.out",
-          stagger: 0.012,
-        },
-      });
+      if (projects?.children.length) {
+        reveal(projects.children, {
+          trigger: projects,
+          start: "top 85%",
+          from: { y: 40 },
+          to: {
+            y: 0,
+            duration: 0.9,
+            stagger: 0.25,
+            ease: "power2.out",
+          },
+        });
+      }
+
+      if (stack?.children.length) {
+        reveal(stack.children, {
+          trigger: stack,
+          start: "top 85%",
+          from: { x: -30 },
+          to: {
+            x: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+        });
+      }
+
+      if (about) {
+        reveal(about.querySelectorAll("p"), {
+          trigger: about,
+          start: "top 85%",
+          from: { y: 30 },
+          to: {
+            y: 0,
+            duration: 0.8,
+            stagger: 0.25,
+            ease: "power3.out",
+          },
+        });
+      }
+
+      if (actions?.children.length) {
+        reveal(actions.children, {
+          trigger: actions,
+          start: "top 90%",
+          from: { scale: 0.9 },
+          to: {
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+          },
+        });
+      }
     });
 
-    // Measure scroll triggers after images load, so they don't fire early.
-    const armScrollReveals = () => {
-      if (!alive) return;
-
-      motion.add(reduced, () => {
-        const projects = projectsRef.current;
-        const stack = stackRef.current;
-        const about = aboutRef.current;
-        const actions = aboutActionsRef.current;
-
-        if (projects?.children.length) {
-          reveal(projects.children, {
-            trigger: projects,
-            start: "top 75%",
-            from: { y: 36 },
-            to: { y: 0, duration: 0.9, stagger: 0.12 },
-          });
-        }
-
-        if (stack?.children.length) {
-          reveal(stack.children, {
-            trigger: stack,
-            start: "top 75%",
-            from: { x: -20 },
-            to: { x: 0, duration: 0.65, stagger: 0.06 },
-          });
-        }
-
-        if (about) {
-          reveal(about.querySelectorAll("p"), {
-            trigger: about,
-            start: "top 75%",
-            from: { y: 24 },
-            to: { y: 0, duration: 0.9, stagger: 0.16 },
-          });
-        }
-
-        if (actions?.children.length) {
-          reveal(actions.children, {
-            trigger: actions,
-            start: "top 82%",
-            from: { y: 14, scale: 0.94 },
-            to: {
-              y: 0,
-              scale: 1,
-              duration: 0.8,
-              ease: "back.out(1.4)",
-              stagger: 0.14,
-            },
-          });
-        }
-
-        ScrollTrigger.refresh();
-      });
-    };
-
-    if (document.readyState === "complete") {
-      armScrollReveals();
-    } else {
-      window.addEventListener("load", armScrollReveals, { once: true });
-    }
+    document.documentElement.classList.add("gsap-ready");
 
     return () => {
-      alive = false;
-      window.removeEventListener("load", armScrollReveals);
-      motion.revert();
+      ctx.revert();
+      document.documentElement.classList.remove("gsap-ready");
     };
   }, []);
 

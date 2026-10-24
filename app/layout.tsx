@@ -47,9 +47,9 @@ export default function RootLayout({
           roboto.className,
         )}
       >
-        <style>{`@media (prefers-reduced-motion:no-preference){.intro-char,.reveal-item{opacity:0}}`}</style>
+        <style>{`html:not(.gsap-ready) .intro-char,html:not(.gsap-ready) .reveal-item{opacity:0}`}</style>
         <noscript>
-          <style>{".intro-char,.reveal-item{opacity:1}"}</style>
+          <style>{".intro-char,.reveal-item{opacity:1!important}"}</style>
         </noscript>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col">
