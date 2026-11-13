@@ -13,7 +13,9 @@ export const SimpleIcon = ({
   color?: string;
 }) => {
   const IconComponent = SiIcon[iconName];
-  return IconComponent ? <IconComponent size={size} color={color} /> : null;
+  return IconComponent ? (
+    <IconComponent size={size} color={color || "currentColor"} />
+  ) : null;
 };
 
 export const Logo: React.FC<IconSvgProps> = ({

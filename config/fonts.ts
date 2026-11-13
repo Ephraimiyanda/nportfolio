@@ -1,11 +1,27 @@
-import { Fira_Code as FontMono, Inter as FontSans } from "next/font/google";
+import {
+  Fraunces,
+  Outfit,
+  JetBrains_Mono,
+} from "next/font/google";
 
-export const fontSans = FontSans({
+export const fontDisplay = Fraunces({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-display",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-export const fontMono = FontMono({
+export const fontSans = Outfit({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+export const fontMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  weight: ["400", "500"],
+  display: "swap",
 });

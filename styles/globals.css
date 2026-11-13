@@ -2,60 +2,118 @@
 
 @config "../tailwind.config.js";
 
-.bg {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  width: 200%;
-  height: 200vh;
-  background: transparent
-    url("http://assets.iceable.com/img/noise-transparent.png") repeat 0 0;
-  background-repeat: repeat;
-  animation: bg-animation 0.2s infinite;
-  opacity: 0.9;
-  visibility: visible;
+:root {
+  --bg: #0b0c0a;
+  --bg-elevated: #121410;
+  --bg-soft: #171914;
+  --fg: #f3f2ec;
+  --muted: #9a9a90;
+  --faint: #6d6d64;
+  --line: rgba(243, 242, 236, 0.1);
+  --accent: #c9e27d;
+  --accent-soft: rgba(201, 226, 125, 0.14);
+  --accent-ink: #121410;
+  --glow: rgba(201, 226, 125, 0.18);
 }
 
-/* Hidden only until GSAP takes over, so the entrance can run instead of staying at 0. */
+.light {
+  --bg: #f4f3ec;
+  --bg-elevated: #ebeae2;
+  --bg-soft: #e4e3da;
+  --fg: #14150f;
+  --muted: #5f5f56;
+  --faint: #8a8a80;
+  --line: rgba(20, 21, 15, 0.12);
+  --accent: #6f8f1f;
+  --accent-soft: rgba(111, 143, 31, 0.12);
+  --accent-ink: #f4f3ec;
+  --glow: rgba(111, 143, 31, 0.16);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 55%),
+    radial-gradient(900px 500px at -10% 20%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 50%),
+    var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.surface {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid var(--line);
+}
+
+.light .surface {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35));
+}
+
+.icon-blend {
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.icon-blend:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.reveal-item,
+.intro-char {
+  will-change: transform, opacity;
+}
+
 html:not(.gsap-ready) .intro-char,
 html:not(.gsap-ready) .reveal-item {
   opacity: 0;
 }
 
-@keyframes bg-animation {
-  0% {
-    transform: translate(0, 0);
+@keyframes soft-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  10% {
-    transform: translate(-5%, -5%);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  20% {
-    transform: translate(-10%, 5%);
+}
+
+.detail-rise {
+  animation: soft-rise 0.45s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  30% {
-    transform: translate(5%, -10%);
+
+  html:not(.gsap-ready) .intro-char,
+  html:not(.gsap-ready) .reveal-item {
+    opacity: 1;
   }
-  40% {
-    transform: translate(-5%, 15%);
-  }
-  50% {
-    transform: translate(-10%, 5%);
-  }
-  60% {
-    transform: translate(15%, 0);
-  }
-  70% {
-    transform: translate(0, 10%);
-  }
-  80% {
-    transform: translate(-15%, 0);
-  }
-  90% {
-    transform: translate(10%, 5%);
-  }
-  100% {
-    transform: translate(5%, 0);
+
+  .icon-blend,
+  .detail-rise {
+    transition: none;
+    animation: none !important;
   }
 }

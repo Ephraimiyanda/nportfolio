@@ -1,10 +1,12 @@
 export function Footer() {
   return (
-    <footer className="w-full flex items-center justify-center text-center py-6 text-sm text-default-500 border-black/10 dark:border-white/15 border-t-[0.5px]">
-      <p>
-        &copy; {new Date().getFullYear()} Ephraim Iyanda. Built with ❤️ &
-        caffeine ☕
-      </p>
+    <footer className="border-t border-[color:var(--line)]">
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-faint sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <p>© {new Date().getFullYear()} Ephraim Iyanda</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em]">
+          Built with care & caffeine
+        </p>
+      </div>
     </footer>
   );
 }

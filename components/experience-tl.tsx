@@ -1,59 +1,25 @@
 "use client";
-import React from "react";
 
-const experiences = [
-  {
-    company: "Freelance",
-    role: "Frontend Developer",
-    date: "Dec 2024 – Present ",
-  },
-  {
-    company: "Rahapay",
-    role: "Frontend Developer",
-    date: "May 2024 – Dec 2024",
-  },
-  {
-    company: "Swift Vista",
-    role: "Frontend Developer",
-    date: "Jan 2024 – Aug 2024",
-  },
-  {
-    company: "HNG Internship",
-    role: "Frontend Developer (Intern)",
-    date: "Sep 2023 – Oct 2023",
-  },
-  {
-    company: "nHub",
-    role: "Frontend Developer (Intern)",
-    date: "Aug 2022 – Aug 2023",
-  },
-];
+import { siteConfig } from "@/config/site";
 
 export default function ExperienceTimeline() {
   return (
-    <div className="">
-      <ul className="flex flex-col relative [&>li]:border-b-[0.5px] [&>li]:last:border-none">
-        {experiences.map((exp, i) => (
-          <li
-            key={i}
-            className="relative py-6 border-black/10 dark:border-white/15 "
-          >
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 w-full">
-              <div className="flex-1">
-                <p className="text-base font-medium  text-default-500 uppercase">
-                  {exp.date}
-                </p>
-              </div>
-              <p className="text-3xl font-medium text-gray-800 dark:text-white flex-1 md:text-center text-left uppercase">
-                {exp.role}
-              </p>
-              <p className="text-base flex-1 md:text-right text-left font-medium ">
-                {exp.company}
-              </p>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="divide-y divide-[color:var(--line)] border-y border-[color:var(--line)]">
+      {siteConfig.experience.map((exp) => (
+        <li key={`${exp.company}-${exp.date}`} className="reveal-item py-6 sm:py-7">
+          <div className="grid gap-3 md:grid-cols-[0.9fr_1.3fr_0.9fr] md:items-baseline md:gap-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+              {exp.date}
+            </p>
+            <p className="font-display text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+              {exp.role}
+            </p>
+            <p className="text-sm font-medium text-mute md:text-right">
+              {exp.company}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
