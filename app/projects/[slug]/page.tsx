@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { GoArrowLeft, GoArrowUpRight } from "react-icons/go";
+import { GoArrowLeft, GoArrowRight, GoArrowUpRight } from "react-icons/go";
 
 import { getProjectBySlug, siteConfig } from "@/config/site";
 
@@ -162,7 +162,8 @@ export default async function ProjectDetailPage({
             href={`/projects/${previous.slug}`}
             className="group rounded-xl border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
           >
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+            <p className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+              <GoArrowLeft size={14} />
               Previous
             </p>
             <p className="mt-2 text-xl font-medium tracking-tight text-ink group-hover:text-accent">
@@ -177,8 +178,9 @@ export default async function ProjectDetailPage({
             href={`/projects/${next.slug}`}
             className="group rounded-xl border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 text-right shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
           >
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
+            <p className="inline-flex items-center justify-end gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
               Next
+              <GoArrowRight size={14} />
             </p>
             <p className="mt-2 text-xl font-medium tracking-tight text-ink group-hover:text-accent">
               {next.name}
