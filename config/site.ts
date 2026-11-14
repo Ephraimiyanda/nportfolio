@@ -4,7 +4,7 @@ export type SiteConfig = typeof siteConfig;
 
 export type Skill = {
   name: string;
-  icon: siIcon;
+  icon: siIcon | "SiCss3" | "SiNextui";
   color?: string;
 };
 
@@ -47,11 +47,11 @@ export const siteConfig = {
       { name: "JavaScript", icon: "SiJavascript", color: "#F7DF1E" },
       { name: "TypeScript", icon: "SiTypescript", color: "#3178C6" },
       { name: "React", icon: "SiReact", color: "#61DBFB" },
-      { name: "Next.js", icon: "SiNextdotjs", color: "" },
-      { name: "HeroUI", icon: "SiNextui", color: "" },
+      { name: "Next.js", icon: "SiNextdotjs", color: "#FFFFFF" },
+      { name: "HeroUI", icon: "SiHeroui", color: "#FFFFFF" },
       { name: "Tailwind", icon: "SiTailwindcss", color: "#06B6D4" },
       { name: "Node.js", icon: "SiNodedotjs", color: "#339933" },
-      { name: "Express", icon: "SiExpress", color: "" },
+      { name: "Express", icon: "SiExpress", color: "#FFFFFF" },
       { name: "MongoDB", icon: "SiMongodb", color: "#47A248" },
     ] as Skill[],
   },

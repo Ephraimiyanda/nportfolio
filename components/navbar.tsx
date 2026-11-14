@@ -26,10 +26,10 @@ export const Navbar = () => {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/15 bg-[#000000]">
       <div className="relative z-[60] mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-6">
         <NextLink href="/" className="group flex min-w-0 items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] font-mono text-xs tracking-[0.12em] text-accent shadow-[var(--shadow-soft)]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black font-mono text-xs tracking-[0.12em] text-accent">
             EI
           </span>
           <span className="min-w-0">
@@ -42,7 +42,7 @@ export const Navbar = () => {
           </span>
         </NextLink>
 
-        <nav className="glass-pill hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex">
+        <nav className="hidden items-center gap-1 rounded-full border border-white/15 bg-black px-2 py-1.5 md:flex">
           {siteConfig.navItems.map((item) => (
             <NextLink
               key={item.href}
@@ -85,7 +85,7 @@ export const Navbar = () => {
             type="button"
             aria-expanded={open}
             aria-label="Toggle menu"
-            className="flex h-10 items-center justify-center rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink shadow-[var(--shadow-soft)] md:hidden"
+            className="flex h-10 items-center justify-center rounded-full border border-white/15 bg-black px-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink md:hidden"
             onClick={() => setOpen((value) => !value)}
           >
             {open ? "Close" : "Menu"}
@@ -94,7 +94,7 @@ export const Navbar = () => {
       </div>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/55 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-300 md:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         onClick={() => setOpen(false)}
@@ -103,7 +103,7 @@ export const Navbar = () => {
 
       <div className="mobile-menu relative z-50 md:hidden" data-open={open}>
         <div className="mobile-menu-inner">
-          <div className="mx-4 mb-4 overflow-hidden rounded-[28px] border border-[color:var(--line)] bg-black/85 px-5 py-6 shadow-[var(--shadow-soft)] backdrop-blur-2xl">
+          <div className="mx-4 mb-4 overflow-hidden rounded-[28px] border border-white/15 bg-black px-5 py-6">
             <div className="flex flex-col gap-1">
               {siteConfig.navItems.map((item, index) => (
                 <NextLink
@@ -124,7 +124,7 @@ export const Navbar = () => {
               ))}
             </div>
 
-            <div className="mt-5 flex flex-col gap-3 border-t border-[color:var(--line)] pt-5">
+            <div className="mt-5 flex flex-col gap-3 border-t border-white/15 pt-5">
               <Button
                 as={Link}
                 href="mailto:iyandaephraim@gmail.com"
@@ -137,7 +137,7 @@ export const Navbar = () => {
                 as={Link}
                 href={siteConfig.resume}
                 endContent={<PiReadCvLogo size={20} />}
-                className="h-12 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 text-sm text-ink shadow-soft"
+                className="h-12 rounded-full border border-white/15 bg-black px-5 text-sm text-ink"
               >
                 Download Resume
               </Button>

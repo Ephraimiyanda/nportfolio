@@ -27,11 +27,7 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(900px 520px at 85% 8%, rgba(202, 232, 189, 0.12), transparent 55%),
-    radial-gradient(700px 420px at 8% 35%, rgba(202, 232, 189, 0.06), transparent 50%),
-    radial-gradient(600px 380px at 60% 90%, rgba(255, 255, 255, 0.03), transparent 45%),
-    var(--bg);
+  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-geist-sans), sans-serif;
   text-rendering: optimizeLegibility;
@@ -72,14 +68,14 @@ body {
 .btn-glow {
   background: var(--accent);
   color: var(--accent-ink);
-  box-shadow: var(--shadow-glow);
+  box-shadow: none;
   transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
 }
 
 .btn-glow:hover {
   filter: brightness(1.05);
   transform: translateY(-1px);
-  box-shadow: 0 0 0 1px rgba(202, 232, 189, 0.18), 0 14px 48px rgba(202, 232, 189, 0.34);
+  box-shadow: none;
 }
 
 .icon-blend {

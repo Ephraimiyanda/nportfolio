@@ -47,7 +47,7 @@ export default function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             <SEO />
             <Navbar />
-            <main className="mx-auto w-full max-w-6xl flex-grow px-5 pt-24 sm:px-6">
+            <main className="mx-auto w-full max-w-6xl flex-grow px-5 pt-20 sm:px-6">
               {children}
             </main>
             <Footer />

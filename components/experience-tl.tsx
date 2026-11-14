@@ -5,11 +5,11 @@ import { siteConfig } from "@/config/site";
 export default function ExperienceTimeline() {
   return (
     <div>
-      <ul className="relative flex flex-col [&>li]:border-b-[0.5px] [&>li]:last:border-none">
+      <ul className="relative flex flex-col">
         {siteConfig.experience.map((exp) => (
           <li
             key={`${exp.company}-${exp.date}`}
-            className="reveal-item relative border-[color:var(--line)] py-6"
+            className="reveal-item relative border-b border-white/15 py-6 last:border-b-0"
           >
             <div className="flex w-full flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <div className="flex-1">

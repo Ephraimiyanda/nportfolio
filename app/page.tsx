@@ -37,8 +37,8 @@ function SectionHeading({
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
             {eyebrow}
           </span>
-          <span className="h-px flex-1 bg-[color:var(--line)] sm:hidden" />
-          <span className="rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-2.5 py-1 font-mono text-[11px] text-faint shadow-soft">
+          <span className="h-px flex-1 bg-white/15 sm:hidden" />
+          <span className="rounded-full border border-white/15 bg-[color:var(--bg-soft)] px-2.5 py-1 font-mono text-[11px] text-faint">
             {index}
           </span>
         </div>
@@ -219,14 +219,11 @@ export default function Home() {
   const focusTags = ["UI Design", "Web Motion", "React", "Next.js"];
 
   return (
-    <div className="flex w-full flex-col gap-24 pb-20 pt-4 md:gap-28 md:pb-28 md:pt-8">
+    <div className="flex w-full flex-col pb-20 md:pb-28">
       <section
         ref={heroRef}
-        className="relative isolate grid min-h-[78vh] items-center gap-10 overflow-hidden pb-10 pt-12 md:min-h-[82vh] md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:pb-16 md:pt-8"
+        className="relative isolate grid items-start gap-10 overflow-hidden pb-14 pt-2 md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:pb-20 md:pt-4"
       >
-        <div className="soft-orb -left-16 top-10 h-56 w-56 bg-[rgba(202,232,189,0.16)]" />
-        <div className="soft-orb bottom-8 right-[35%] h-40 w-40 bg-[rgba(202,232,189,0.08)] md:right-[42%]" />
-
         <div className="relative z-10 max-w-2xl">
           <div className="hero-fade mb-6 flex flex-wrap gap-2">
             {focusTags.map((tag) => (
@@ -307,7 +304,7 @@ export default function Home() {
                 "Frontend architecture with React",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm text-ink">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_12px_var(--glow)]" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -316,7 +313,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="work" className="scroll-mt-28">
+      <section id="work" className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20">
         <SectionHeading
           index="01"
           eyebrow="Selected work"
@@ -334,7 +331,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="stack" className="scroll-mt-28">
+      <section id="stack" className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20">
         <SectionHeading
           index="02"
           eyebrow="Stack"
@@ -348,7 +345,7 @@ export default function Home() {
           {siteConfig.skills.technicalSkills.map((skill) => (
             <li
               key={skill.name}
-              className="reveal-item group flex flex-col items-start gap-4 rounded-[22px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.025)] px-4 py-5 shadow-soft transition duration-300 hover:border-accent/30 hover:bg-[color:var(--accent-soft)]"
+              className="reveal-item group flex flex-col items-start gap-4 rounded-[22px] border border-white/15 bg-[rgba(255,255,255,0.025)] px-4 py-5 transition duration-300 hover:border-accent/30 hover:bg-[color:var(--accent-soft)]"
             >
               <SimpleIcon
                 color={skill.color || "currentColor"}
@@ -363,7 +360,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section id="story" className="scroll-mt-28">
+      <section id="story" className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20">
         <SectionHeading
           index="03"
           eyebrow="My story"
@@ -373,7 +370,7 @@ export default function Home() {
           ref={storyRef}
           className="grid items-start gap-10 md:grid-cols-[0.75fr_1.25fr]"
         >
-          <div className="reveal-item relative aspect-[3/4] w-full max-w-[280px] overflow-hidden rounded-[28px] border border-[color:var(--line)] shadow-soft md:max-w-none">
+          <div className="reveal-item relative aspect-[3/4] w-full max-w-[280px] overflow-hidden rounded-[28px] border border-white/15 md:max-w-none">
             <Image
               alt="Portrait of Ephraim Iyanda"
               className="object-cover object-[center_20%]"
@@ -407,7 +404,7 @@ export default function Home() {
                 href={siteConfig.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink shadow-soft transition hover:border-accent/35 hover:text-accent"
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink transition hover:border-accent/35 hover:text-accent"
               >
                 <PiReadCvLogo size={18} />
                 Download resume
@@ -420,7 +417,7 @@ export default function Home() {
       <section
         id="experience"
         ref={experienceRef}
-        className="scroll-mt-28"
+        className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20"
       >
         <SectionHeading
           index="04"
@@ -430,7 +427,7 @@ export default function Home() {
         <ExperienceTimeline />
       </section>
 
-      <section id="contact" className="scroll-mt-28 pb-8">
+      <section id="contact" className="scroll-mt-28 border-t border-white/15 pb-8 pt-16 md:pt-20">
         <SectionHeading
           index="05"
           eyebrow="Contact"
