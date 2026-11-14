@@ -313,7 +313,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="work" className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20">
+      <section id="work" className="scroll-mt-28 pt-16 md:pt-20">
         <SectionHeading
           index="01"
           eyebrow="Selected work"
@@ -331,7 +331,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="stack" className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20">
+      <section id="stack" className="scroll-mt-28 pt-16 md:pt-20">
         <SectionHeading
           index="02"
           eyebrow="Stack"
@@ -360,7 +360,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section id="story" className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20">
+      <section id="story" className="scroll-mt-28 pt-16 md:pt-20">
         <SectionHeading
           index="03"
           eyebrow="My story"
@@ -417,7 +417,7 @@ export default function Home() {
       <section
         id="experience"
         ref={experienceRef}
-        className="scroll-mt-28 border-t border-white/15 pt-16 md:pt-20"
+        className="scroll-mt-28 pt-16 md:pt-20"
       >
         <SectionHeading
           index="04"
@@ -427,7 +427,7 @@ export default function Home() {
         <ExperienceTimeline />
       </section>
 
-      <section id="contact" className="scroll-mt-28 border-t border-white/15 pb-8 pt-16 md:pt-20">
+      <section id="contact" className="scroll-mt-28 pb-8 pt-16 md:pt-20">
         <SectionHeading
           index="05"
           eyebrow="Contact"

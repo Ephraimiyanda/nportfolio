@@ -26,7 +26,7 @@ export const Navbar = () => {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/15 bg-[#000000]">
+    <header className="fixed inset-x-0 top-0 z-50 bg-[#000000]">
       <div className="relative z-[60] mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-6">
         <NextLink href="/" className="group flex min-w-0 items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black font-mono text-xs tracking-[0.12em] text-accent">
