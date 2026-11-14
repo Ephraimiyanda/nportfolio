@@ -4,22 +4,29 @@ import { siteConfig } from "@/config/site";
 
 export default function ExperienceTimeline() {
   return (
-    <ul className="divide-y divide-[color:var(--line)] border-y border-[color:var(--line)]">
-      {siteConfig.experience.map((exp) => (
-        <li key={`${exp.company}-${exp.date}`} className="reveal-item py-6 sm:py-7">
-          <div className="grid gap-3 md:grid-cols-[0.9fr_1.3fr_0.9fr] md:items-baseline md:gap-6">
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
-              {exp.date}
-            </p>
-            <p className="font-display text-2xl font-medium tracking-tight text-ink sm:text-3xl">
-              {exp.role}
-            </p>
-            <p className="text-sm font-medium text-mute md:text-right">
-              {exp.company}
-            </p>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className="relative flex flex-col [&>li]:border-b-[0.5px] [&>li]:last:border-none">
+        {siteConfig.experience.map((exp) => (
+          <li
+            key={`${exp.company}-${exp.date}`}
+            className="reveal-item relative border-[color:var(--line)] py-6"
+          >
+            <div className="flex w-full flex-col gap-2 md:flex-row md:items-center md:justify-between">
+              <div className="flex-1">
+                <p className="text-base font-medium uppercase text-mute">
+                  {exp.date}
+                </p>
+              </div>
+              <p className="flex-1 text-left text-3xl font-medium uppercase text-ink md:text-center">
+                {exp.role}
+              </p>
+              <p className="flex-1 text-left text-base font-medium text-ink md:text-right">
+                {exp.company}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

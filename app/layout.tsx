@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
-import { fontDisplay, fontSans, fontMono } from "@/config/fonts";
+import { fontSans, fontMono } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import SEO from "@/components/seo";
@@ -39,7 +39,6 @@ export default function RootLayout({
         className={clsx(
           "min-h-screen bg-canvas font-sans text-ink antialiased",
           fontSans.variable,
-          fontDisplay.variable,
           fontMono.variable,
         )}
       >

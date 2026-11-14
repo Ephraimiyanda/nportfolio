@@ -9,6 +9,7 @@ export type Skill = {
 };
 
 export type Project = {
+  slug: string;
   name: string;
   category: string;
   summary: string;
@@ -56,6 +57,7 @@ export const siteConfig = {
   },
   projects: [
     {
+      slug: "z-store",
       name: "Z-store",
       category: "Commerce • Fashion",
       summary:
@@ -76,6 +78,7 @@ export const siteConfig = {
         "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1766180153/lfxxusljpfnb0gfki3eh.png",
     },
     {
+      slug: "realswitch",
       name: "Realswitch",
       category: "Marketplace • Real Estate",
       summary:
@@ -96,6 +99,7 @@ export const siteConfig = {
         "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1760829583/usje6svm7mt3mekp6kqs.png",
     },
     {
+      slug: "kasuwa",
       name: "Kasuwa",
       category: "Agritech • Commerce",
       summary:
@@ -116,6 +120,7 @@ export const siteConfig = {
         "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1760829585/egflnuzglvfigyekmqgz.png",
     },
     {
+      slug: "chatava",
       name: "ChatAva",
       category: "Product • AI Landing",
       summary:
@@ -137,6 +142,7 @@ export const siteConfig = {
         "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1760829583/ninpreq7twdyva826zsm.png",
     },
     {
+      slug: "getlinked",
       name: "GetLinked",
       category: "Events • Hackathon",
       summary:
@@ -157,6 +163,7 @@ export const siteConfig = {
         "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1760829583/hmkztnpwnj7ypylmnwlr.png",
     },
     {
+      slug: "evently",
       name: "Evently",
       category: "SaaS • Event Planning",
       summary:
@@ -207,8 +214,12 @@ export const siteConfig = {
   aboutImg:
     "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1761279203/bdfipp6dcuptjf5sjtrt.jpg",
   profileImg:
-    "https://res.cloudinary.com/dg0kdnwt1/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1761279205/yhqqskf40vrljvbdmifv.jpg",
+    "https://res.cloudinary.com/dg0kdnwt1/image/upload/w_1200,c_fill,ar_3:4,g_auto/v1761279205/yhqqskf40vrljvbdmifv.jpg",
   meetingLink: "https://calendly.com/iyandaephraim/30min",
   resume:
     "https://drive.google.com/file/d/1gxzkmANXy2Zhi-V3liI2A_JZ3lKIgoKF/view",
 };
+
+export function getProjectBySlug(slug: string) {
+  return siteConfig.projects.find((project) => project.slug === slug);
+}

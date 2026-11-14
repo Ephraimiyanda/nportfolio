@@ -40,7 +40,7 @@ body {
     radial-gradient(900px 500px at -10% 20%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 50%),
     var(--bg);
   color: var(--fg);
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -50,11 +50,12 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-geist-sans), sans-serif;
+  letter-spacing: -0.04em;
 }
 
 .font-mono {
-  font-family: var(--font-mono), ui-monospace, monospace;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 .surface {

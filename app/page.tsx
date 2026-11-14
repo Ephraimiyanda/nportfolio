@@ -11,7 +11,7 @@ import { PiReadCvLogo } from "react-icons/pi";
 import { ContactForm } from "@/components/contact-form";
 import ExperienceTimeline from "@/components/experience-tl";
 import { SimpleIcon } from "@/components/icons";
-import { ProjectShowcase } from "@/components/project-showcase";
+import { ProjectCard } from "@/components/project-card";
 import { siteConfig } from "@/config/site";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -284,9 +284,17 @@ export default function Home() {
           index="01"
           eyebrow="Selected work"
           title="Projects with room to breathe."
-          copy="Browse a build, then read what it actually does — category, stack, and the decisions behind the interface."
+          copy="Open a card to read the brief, stack, and highlights — then jump to the live build if you want."
         />
-        <ProjectShowcase projects={siteConfig.projects} />
+        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {siteConfig.projects.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              index={index}
+              project={project}
+            />
+          ))}
+        </div>
       </section>
 
       <section id="stack" className="scroll-mt-28">

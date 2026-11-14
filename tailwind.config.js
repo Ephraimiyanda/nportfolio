@@ -20,9 +20,9 @@ const config = {
         "accent-ink": "var(--accent-ink)",
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        display: ["var(--font-display)"],
-        mono: ["var(--font-mono)"],
+        sans: ["var(--font-geist-sans)", "sans-serif"],
+        display: ["var(--font-geist-sans)", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
         accent: "0 0 40px var(--glow)",
