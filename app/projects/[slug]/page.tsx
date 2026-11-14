@@ -70,7 +70,7 @@ export default async function ProjectDetailPage({
         {project.summary}
       </p>
 
-      <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-[28px] border border-[color:var(--line)] bg-soft shadow-soft">
+      <div className="relative mt-10 aspect-[5/3] overflow-hidden rounded-xl border border-[color:var(--line)] bg-soft shadow-soft sm:aspect-[16/10]">
         <Image
           alt={`${project.name} preview`}
           className="object-cover"
@@ -96,14 +96,14 @@ export default async function ProjectDetailPage({
                 key={point}
                 className="flex gap-3 text-[15px] leading-relaxed text-ink"
               >
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_12px_var(--glow)]" />
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                 <span>{point}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <aside className="h-fit rounded-[28px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.025)] p-5 shadow-soft sm:p-6">
+        <aside className="h-fit rounded-xl border border-[color:var(--line)] bg-[rgba(255,255,255,0.025)] p-5 shadow-soft sm:p-6">
           <dl className="space-y-5">
             <div>
               <dt className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
@@ -125,7 +125,7 @@ export default async function ProjectDetailPage({
                 {project.tech.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-[color:var(--line)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-mute"
+                    className="rounded-md border border-[color:var(--line)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-mute"
                   >
                     {item}
                   </span>
@@ -160,7 +160,7 @@ export default async function ProjectDetailPage({
         {previous ? (
           <Link
             href={`/projects/${previous.slug}`}
-            className="group rounded-[22px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
+            className="group rounded-xl border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
           >
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
               Previous
@@ -175,7 +175,7 @@ export default async function ProjectDetailPage({
         {next ? (
           <Link
             href={`/projects/${next.slug}`}
-            className="group rounded-[22px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 text-right shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
+            className="group rounded-xl border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 text-right shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
           >
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
               Next
