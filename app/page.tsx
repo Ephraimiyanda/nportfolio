@@ -282,12 +282,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 hidden md:block">
-          <div className="hero-panel float-soft surface absolute -left-4 top-8 w-[78%] rounded-[28px] p-5">
+        <div className="relative z-10 h-[360px] w-full sm:h-[380px] md:h-[400px]">
+          <div className="hero-panel float-soft surface absolute left-0 top-2 w-[88%] rounded-[28px] p-5 sm:w-[80%] md:-left-4 md:top-8 md:w-[78%]">
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
               Currently building
             </p>
-            <p className="mt-3 text-xl font-medium tracking-tight text-ink">
+            <p className="mt-3 text-lg font-medium tracking-tight text-ink sm:text-xl">
               Interfaces that feel quiet, fast, and intentional.
             </p>
             <p className="mt-2 text-sm leading-relaxed text-mute">
@@ -296,15 +296,10 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="hero-panel float-soft-delayed surface ml-auto mt-36 w-[84%] rounded-[28px] p-5">
-            <div className="mb-4 flex items-center justify-between">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
-                Focus
-              </p>
-              <span className="rounded-full bg-accent/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
-                Open to work
-              </span>
-            </div>
+          <div className="hero-panel float-soft-delayed surface absolute right-0 top-[11.5rem] w-[90%] rounded-[28px] p-5 sm:w-[84%] md:top-[12.5rem]">
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
+              Focus
+            </p>
             <ul className="space-y-3">
               {[
                 "Design systems & product UI",
@@ -318,20 +313,6 @@ export default function Home() {
               ))}
             </ul>
           </div>
-        </div>
-
-        <div className="hero-panel surface relative z-10 rounded-[28px] p-5 md:hidden">
-          <div className="mb-3 flex items-center justify-between">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-              Currently building
-            </p>
-            <span className="rounded-full bg-accent/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
-              Open to work
-            </span>
-          </div>
-          <p className="text-base font-medium text-ink">
-            Interfaces that feel quiet, fast, and intentional.
-          </p>
         </div>
       </section>
 
