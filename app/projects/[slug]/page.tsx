@@ -70,13 +70,13 @@ export default async function ProjectDetailPage({
         {project.summary}
       </p>
 
-      <div className="relative mt-10 aspect-[5/3] overflow-hidden rounded-xl border border-[color:var(--line)] bg-soft shadow-soft sm:aspect-[16/10]">
+      <div className="relative mt-10 aspect-[5/3] overflow-hidden rounded-xl border border-[color:var(--line)] bg-soft shadow-soft md:mx-auto md:aspect-[16/10] md:max-w-3xl lg:max-w-4xl">
         <Image
           alt={`${project.name} preview`}
           className="object-cover"
           fill
           priority
-          sizes="(max-width: 1152px) 100vw, 1152px"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 48rem, 56rem"
           src={project.imageUrl}
         />
       </div>
