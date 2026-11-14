@@ -38,7 +38,7 @@ function SectionHeading({
             {eyebrow}
           </span>
           <span className="h-px flex-1 bg-[color:var(--line)] sm:hidden" />
-          <span className="border border-[color:var(--line)] px-2 py-1 font-mono text-[11px] text-faint">
+          <span className="rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-2.5 py-1 font-mono text-[11px] text-faint shadow-soft">
             {index}
           </span>
         </div>
@@ -102,30 +102,50 @@ export default function Home() {
       const experience = experienceRef.current;
 
       if (hero) {
-        reveal(hero.querySelectorAll(".intro-char"), {
-          trigger: hero,
-          start: "top 80%",
-          from: { y: 20 },
-          to: {
+        gsap.fromTo(
+          hero.querySelectorAll(".intro-char"),
+          { opacity: 0, y: 22 },
+          {
+            opacity: 1,
             y: 0,
-            duration: 0.3,
-            stagger: 0.018,
+            duration: 0.35,
+            stagger: 0.02,
             ease: "power2.out",
+            delay: 0.05,
           },
-        });
+        );
 
-        reveal(hero.querySelectorAll(".hero-fade"), {
-          trigger: hero,
-          start: "top 80%",
-          from: { y: 16 },
-          to: {
+        gsap.fromTo(
+          hero.querySelectorAll(".hero-fade"),
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.75,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.28,
+          },
+        );
+
+        gsap.fromTo(
+          hero.querySelectorAll(".hero-panel"),
+          { opacity: 0, y: 28, scale: 0.97 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.9,
             stagger: 0.12,
             ease: "power3.out",
-            delay: 0.15,
+            delay: 0.45,
+            onComplete: () => {
+              gsap.set(hero.querySelectorAll(".hero-panel"), {
+                clearProps: "transform",
+              });
+            },
           },
-        });
+        );
       }
 
       if (stack?.children.length) {
@@ -196,57 +216,122 @@ export default function Home() {
   }, []);
 
   const brand = "Ephraim Iyanda";
+  const focusTags = ["UI Design", "Web Motion", "React", "Next.js"];
 
   return (
     <div className="flex w-full flex-col gap-24 pb-20 pt-4 md:gap-28 md:pb-28 md:pt-8">
       <section
         ref={heroRef}
-        className="relative flex min-h-[72vh] max-w-3xl flex-col justify-center pb-10 pt-16 md:min-h-[78vh] md:pb-16 md:pt-8"
+        className="relative isolate grid min-h-[78vh] items-center gap-10 overflow-hidden pb-10 pt-12 md:min-h-[82vh] md:grid-cols-[1.15fr_0.85fr] md:gap-12 md:pb-16 md:pt-8"
       >
-        <p className="hero-fade mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-          Frontend developer · interfaces & motion
-        </p>
+        <div className="soft-orb -left-16 top-10 h-56 w-56 bg-[rgba(202,232,189,0.16)]" />
+        <div className="soft-orb bottom-8 right-[35%] h-40 w-40 bg-[rgba(202,232,189,0.08)] md:right-[42%]" />
 
-        <h1 className="font-display text-[clamp(3.2rem,10vw,6.8rem)] font-medium leading-[0.9] tracking-[-0.03em] text-ink">
-          {brand.split(" ").map((word, wordIndex, words) => (
-            <span key={word} className="inline-block whitespace-nowrap">
-              {word.split("").map((char, charIndex) => (
-                <span
-                  key={`${word}-${charIndex}`}
-                  className="intro-char inline-block"
-                >
-                  {char}
-                </span>
+        <div className="relative z-10 max-w-2xl">
+          <div className="hero-fade mb-6 flex flex-wrap gap-2">
+            {focusTags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-3.5 py-1.5 text-xs text-mute shadow-soft"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <h1 className="font-display text-[clamp(3.2rem,9vw,6.4rem)] font-medium leading-[0.9] tracking-[-0.04em] text-ink">
+            {brand.split(" ").map((word, wordIndex, words) => (
+              <span key={word} className="inline-block whitespace-nowrap">
+                {Array.from(word).map((char, charIndex) => (
+                  <span
+                    key={`${word}-${charIndex}`}
+                    className="intro-char inline-block"
+                  >
+                    {char}
+                  </span>
+                ))}
+                {wordIndex < words.length - 1 ? "\u00A0" : null}
+              </span>
+            ))}
+          </h1>
+
+          <p className="hero-fade mt-6 max-w-xl text-lg leading-relaxed text-mute sm:text-xl">
+            I build{" "}
+            <span className="font-medium text-ink">performant</span>,{" "}
+            <span className="font-medium text-ink">visually sharp</span> web
+            experiences — driven by clean UI and thoughtful animation.
+          </p>
+
+          <div className="hero-fade mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/#work"
+              className="btn-glow inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium"
+            >
+              View work
+              <GoArrowUpRight size={18} />
+            </Link>
+            <Link
+              href={siteConfig.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink shadow-soft transition hover:border-accent/35 hover:text-accent"
+            >
+              <PiReadCvLogo size={18} />
+              Resume
+            </Link>
+          </div>
+        </div>
+
+        <div className="relative z-10 hidden md:block">
+          <div className="hero-panel float-soft surface absolute -left-4 top-8 w-[78%] rounded-[28px] p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+              Currently building
+            </p>
+            <p className="mt-3 text-xl font-medium tracking-tight text-ink">
+              Interfaces that feel quiet, fast, and intentional.
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-mute">
+              Product UIs, landing systems, and motion that supports hierarchy
+              instead of competing with it.
+            </p>
+          </div>
+
+          <div className="hero-panel float-soft-delayed surface ml-auto mt-36 w-[84%] rounded-[28px] p-5">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
+                Focus
+              </p>
+              <span className="rounded-full bg-accent/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+                Open to work
+              </span>
+            </div>
+            <ul className="space-y-3">
+              {[
+                "Design systems & product UI",
+                "Scroll storytelling & micro-motion",
+                "Frontend architecture with React",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-ink">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_12px_var(--glow)]" />
+                  <span>{item}</span>
+                </li>
               ))}
-              {wordIndex < words.length - 1 ? "\u00A0" : null}
+            </ul>
+          </div>
+        </div>
+
+        <div className="hero-panel surface relative z-10 rounded-[28px] p-5 md:hidden">
+          <div className="mb-3 flex items-center justify-between">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+              Currently building
+            </p>
+            <span className="rounded-full bg-accent/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+              Open to work
             </span>
-          ))}
-        </h1>
-
-        <p className="hero-fade mt-6 max-w-xl text-lg leading-relaxed text-mute sm:text-xl">
-          I build{" "}
-          <span className="font-medium text-ink">performant</span>,{" "}
-          <span className="font-medium text-ink">visually sharp</span> web
-          experiences — driven by clean UI and thoughtful animation.
-        </p>
-
-        <div className="hero-fade mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/#work"
-            className="inline-flex items-center gap-2 bg-accent px-5 py-3 text-sm font-medium text-accent-ink shadow-accent transition hover:brightness-110"
-          >
-            View work
-            <GoArrowUpRight size={18} />
-          </Link>
-          <Link
-            href={siteConfig.resume}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 border border-[color:var(--line)] px-5 py-3 text-sm text-ink transition hover:border-accent/40 hover:text-accent"
-          >
-            <PiReadCvLogo size={18} />
-            Resume
-          </Link>
+          </div>
+          <p className="text-base font-medium text-ink">
+            Interfaces that feel quiet, fast, and intentional.
+          </p>
         </div>
       </section>
 
@@ -282,7 +367,7 @@ export default function Home() {
           {siteConfig.skills.technicalSkills.map((skill) => (
             <li
               key={skill.name}
-              className="reveal-item group flex flex-col items-start gap-4 border border-[color:var(--line)] bg-white/[0.015] px-4 py-5 transition duration-300 hover:border-accent/30 hover:bg-[color:var(--accent-soft)]"
+              className="reveal-item group flex flex-col items-start gap-4 rounded-[22px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.025)] px-4 py-5 shadow-soft transition duration-300 hover:border-accent/30 hover:bg-[color:var(--accent-soft)]"
             >
               <SimpleIcon
                 color={skill.color || "currentColor"}
@@ -307,7 +392,7 @@ export default function Home() {
           ref={storyRef}
           className="grid items-start gap-10 md:grid-cols-[0.75fr_1.25fr]"
         >
-          <div className="reveal-item relative aspect-[3/4] w-full max-w-[280px] overflow-hidden border border-[color:var(--line)] md:max-w-none">
+          <div className="reveal-item relative aspect-[3/4] w-full max-w-[280px] overflow-hidden rounded-[28px] border border-[color:var(--line)] shadow-soft md:max-w-none">
             <Image
               alt="Portrait of Ephraim Iyanda"
               className="object-cover object-[center_20%]"
@@ -332,7 +417,7 @@ export default function Home() {
             <div className="reveal-item flex flex-wrap gap-3 pt-2">
               <Link
                 href="mailto:iyandaephraim@gmail.com"
-                className="inline-flex items-center gap-2 border border-[color:var(--line)] px-5 py-3 text-sm text-ink transition hover:border-accent/40 hover:text-accent"
+                className="btn-glow inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium"
               >
                 Let’s talk
                 <GoArrowUpRight size={18} />
@@ -341,7 +426,7 @@ export default function Home() {
                 href={siteConfig.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 border border-[color:var(--line)] px-5 py-3 text-sm text-ink transition hover:border-accent/40 hover:text-accent"
+                className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink shadow-soft transition hover:border-accent/35 hover:text-accent"
               >
                 <PiReadCvLogo size={18} />
                 Download resume

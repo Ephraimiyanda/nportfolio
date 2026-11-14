@@ -14,7 +14,7 @@ export function ContactForm() {
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Link
           href="mailto:iyandaephraim@gmail.com"
-          className="inline-flex items-center gap-2 bg-accent px-5 py-3 text-sm font-medium text-accent-ink shadow-accent transition hover:brightness-110"
+          className="btn-glow inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium"
         >
           Let’s talk
           <GoArrowUpRight size={18} />
@@ -23,7 +23,7 @@ export function ContactForm() {
           href={siteConfig.meetingLink}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 border border-[color:var(--line)] px-5 py-3 text-sm text-ink transition hover:border-accent/40 hover:text-accent"
+          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink shadow-soft transition hover:border-accent/35 hover:text-accent"
         >
           <IoCalendarOutline size={18} />
           Book a call

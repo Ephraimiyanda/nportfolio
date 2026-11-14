@@ -25,7 +25,8 @@ const config = {
         mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        accent: "0 0 40px var(--glow)",
+        accent: "var(--shadow-glow)",
+        soft: "var(--shadow-soft)",
       },
     },
   },

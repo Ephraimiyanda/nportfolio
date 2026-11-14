@@ -70,7 +70,7 @@ export default async function ProjectDetailPage({
         {project.summary}
       </p>
 
-      <div className="relative mt-10 aspect-[16/9] overflow-hidden border border-[color:var(--line)] bg-soft">
+      <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-[28px] border border-[color:var(--line)] bg-soft shadow-soft">
         <Image
           alt={`${project.name} preview`}
           className="object-cover"
@@ -96,14 +96,14 @@ export default async function ProjectDetailPage({
                 key={point}
                 className="flex gap-3 text-[15px] leading-relaxed text-ink"
               >
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_12px_var(--glow)]" />
                 <span>{point}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <aside className="h-fit border border-[color:var(--line)] bg-white/[0.015] p-5 sm:p-6">
+        <aside className="h-fit rounded-[28px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.025)] p-5 shadow-soft sm:p-6">
           <dl className="space-y-5">
             <div>
               <dt className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
@@ -125,7 +125,7 @@ export default async function ProjectDetailPage({
                 {project.tech.map((item) => (
                   <span
                     key={item}
-                    className="border border-[color:var(--line)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-mute"
+                    className="rounded-full border border-[color:var(--line)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-mute"
                   >
                     {item}
                   </span>
@@ -139,7 +139,7 @@ export default async function ProjectDetailPage({
               href={project.liveLink}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-accent px-4 py-3 text-sm font-medium text-accent-ink shadow-accent transition hover:brightness-110"
+              className="btn-glow inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-medium"
             >
               View live
               <GoArrowUpRight size={18} />
@@ -148,7 +148,7 @@ export default async function ProjectDetailPage({
               href={project.sourceLink}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 border border-[color:var(--line)] px-4 py-3 text-sm text-ink transition hover:border-accent/40 hover:text-accent"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-4 py-3 text-sm text-ink shadow-soft transition hover:border-accent/40 hover:text-accent"
             >
               Source code
             </Link>
@@ -160,7 +160,7 @@ export default async function ProjectDetailPage({
         {previous ? (
           <Link
             href={`/projects/${previous.slug}`}
-            className="group border border-[color:var(--line)] p-5 transition hover:border-accent/35"
+            className="group rounded-[22px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
           >
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
               Previous
@@ -175,7 +175,7 @@ export default async function ProjectDetailPage({
         {next ? (
           <Link
             href={`/projects/${next.slug}`}
-            className="group border border-[color:var(--line)] p-5 text-right transition hover:border-accent/35"
+            className="group rounded-[22px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.02)] p-5 text-right shadow-soft transition hover:border-accent/35 hover:bg-[color:var(--accent-soft)]"
           >
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
               Next

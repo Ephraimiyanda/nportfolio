@@ -3,41 +3,34 @@
 @config "../tailwind.config.js";
 
 :root {
-  --bg: #0b0c0a;
-  --bg-elevated: #121410;
-  --bg-soft: #171914;
-  --fg: #f3f2ec;
-  --muted: #9a9a90;
-  --faint: #6d6d64;
-  --line: rgba(243, 242, 236, 0.1);
-  --accent: #c9e27d;
-  --accent-soft: rgba(201, 226, 125, 0.14);
-  --accent-ink: #121410;
-  --glow: rgba(201, 226, 125, 0.18);
-}
-
-.light {
-  --bg: #f4f3ec;
-  --bg-elevated: #ebeae2;
-  --bg-soft: #e4e3da;
-  --fg: #14150f;
-  --muted: #5f5f56;
-  --faint: #8a8a80;
-  --line: rgba(20, 21, 15, 0.12);
-  --accent: #6f8f1f;
-  --accent-soft: rgba(111, 143, 31, 0.12);
-  --accent-ink: #f4f3ec;
-  --glow: rgba(111, 143, 31, 0.16);
+  --bg: #000000;
+  --bg-elevated: rgba(255, 255, 255, 0.03);
+  --bg-soft: rgba(255, 255, 255, 0.045);
+  --fg: #f5f5f0;
+  --muted: #a8a89e;
+  --faint: #6f6f68;
+  --line: rgba(255, 255, 255, 0.08);
+  --accent: #cae8bd;
+  --accent-soft: rgba(202, 232, 189, 0.14);
+  --accent-ink: #0a0a0a;
+  --glow: rgba(202, 232, 189, 0.45);
+  --shadow-soft:
+    0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-glow: 0 0 0 1px rgba(202, 232, 189, 0.12), 0 10px 40px rgba(202, 232, 189, 0.28);
 }
 
 html {
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
 body {
   background:
-    radial-gradient(1200px 600px at 80% -10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 55%),
-    radial-gradient(900px 500px at -10% 20%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 50%),
+    radial-gradient(900px 520px at 85% 8%, rgba(202, 232, 189, 0.12), transparent 55%),
+    radial-gradient(700px 420px at 8% 35%, rgba(202, 232, 189, 0.06), transparent 50%),
+    radial-gradient(600px 380px at 60% 90%, rgba(255, 255, 255, 0.03), transparent 45%),
     var(--bg);
   color: var(--fg);
   font-family: var(--font-geist-sans), sans-serif;
@@ -59,12 +52,34 @@ body {
 }
 
 .surface {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.045),
+    rgba(255, 255, 255, 0.02)
+  );
   border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
 }
 
-.light .surface {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35));
+.glass-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.btn-glow {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: var(--shadow-glow);
+  transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-glow:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(202, 232, 189, 0.18), 0 14px 48px rgba(202, 232, 189, 0.34);
 }
 
 .icon-blend {
@@ -78,13 +93,40 @@ body {
 }
 
 .reveal-item,
-.intro-char {
+.intro-char,
+.hero-fade {
   will-change: transform, opacity;
 }
 
 html:not(.gsap-ready) .intro-char,
-html:not(.gsap-ready) .reveal-item {
+html:not(.gsap-ready) .reveal-item,
+html:not(.gsap-ready) .hero-fade {
   opacity: 0;
+}
+
+.mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease;
+}
+
+.mobile-menu[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.mobile-menu-inner {
+  overflow: hidden;
+}
+
+.soft-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(50px);
+  pointer-events: none;
 }
 
 @keyframes soft-rise {
@@ -98,8 +140,26 @@ html:not(.gsap-ready) .reveal-item {
   }
 }
 
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .detail-rise {
   animation: soft-rise 0.45s ease;
+}
+
+.float-soft {
+  animation: float-soft 7s ease-in-out infinite;
+}
+
+.float-soft-delayed {
+  animation: float-soft 8.5s ease-in-out 1.2s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -108,12 +168,17 @@ html:not(.gsap-ready) .reveal-item {
   }
 
   html:not(.gsap-ready) .intro-char,
-  html:not(.gsap-ready) .reveal-item {
+  html:not(.gsap-ready) .reveal-item,
+  html:not(.gsap-ready) .hero-fade {
     opacity: 1;
   }
 
   .icon-blend,
-  .detail-rise {
+  .detail-rise,
+  .float-soft,
+  .float-soft-delayed,
+  .mobile-menu,
+  .btn-glow {
     transition: none;
     animation: none !important;
   }

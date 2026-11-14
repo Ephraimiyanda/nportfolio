@@ -21,10 +21,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f2ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0c0a" },
-  ],
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -42,11 +39,11 @@ export default function RootLayout({
           fontMono.variable,
         )}
       >
-        <style>{`html:not(.gsap-ready) .intro-char,html:not(.gsap-ready) .reveal-item{opacity:0}`}</style>
+        <style>{`html:not(.gsap-ready) .intro-char,html:not(.gsap-ready) .reveal-item,html:not(.gsap-ready) .hero-fade{opacity:0}`}</style>
         <noscript>
-          <style>{`.intro-char,.reveal-item{opacity:1!important}`}</style>
+          <style>{`.intro-char,.reveal-item,.hero-fade{opacity:1!important}`}</style>
         </noscript>
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers>
           <div className="relative flex min-h-screen flex-col">
             <SEO />
             <Navbar />

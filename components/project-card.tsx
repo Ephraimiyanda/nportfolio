@@ -16,7 +16,7 @@ export function ProjectCard({
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className={`reveal-item group flex h-full flex-col overflow-hidden border border-[color:var(--line)] bg-white/[0.015] transition duration-300 hover:border-accent/35 hover:bg-[color:var(--accent-soft)] ${className}`}
+      className={`reveal-item group flex h-full flex-col overflow-hidden rounded-[28px] border border-[color:var(--line)] bg-[rgba(255,255,255,0.025)] shadow-soft transition duration-300 hover:border-accent/30 hover:bg-[color:var(--accent-soft)] ${className}`}
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-soft">
         <Image
@@ -28,12 +28,12 @@ export function ProjectCard({
         />
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 p-4 sm:p-5">
+      <div className="flex flex-1 flex-col gap-4 p-5">
         <div className="flex items-center justify-between gap-3">
           <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-faint">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
+          <span className="rounded-full bg-accent/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
             {project.category}
           </span>
         </div>
@@ -42,7 +42,7 @@ export function ProjectCard({
           <h3 className="text-xl font-medium tracking-tight text-ink sm:text-2xl">
             {project.name}
           </h3>
-          <span className="mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center border border-[color:var(--line)] text-ink transition group-hover:border-accent/40 group-hover:text-accent">
+          <span className="mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[color:var(--line)] bg-black/20 text-ink transition group-hover:border-accent/40 group-hover:text-accent">
             <GoArrowUpRight size={16} />
           </span>
         </div>
@@ -53,7 +53,7 @@ export function ProjectCard({
           {project.tech.slice(0, 3).map((item) => (
             <span
               key={item}
-              className="border border-[color:var(--line)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-mute"
+              className="rounded-full border border-[color:var(--line)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-mute"
             >
               {item}
             </span>
