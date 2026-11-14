@@ -1,20 +1,14 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
-import { Roboto } from "next/font/google";
-import { Providers } from "./providers";
 
+import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
+import { fontSans, fontMono } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import SEO from "@/components/seo";
-const roboto = Roboto({
-  weight: "500",
-  subsets: ["latin"],
-  display: "swap",
-});
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -27,10 +21,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -43,19 +34,20 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans text-foreground antialiased",
-          roboto.className,
+          "min-h-screen bg-canvas font-sans text-ink antialiased",
+          fontSans.variable,
+          fontMono.variable,
         )}
       >
-        <style>{`html:not(.gsap-ready) .intro-char,html:not(.gsap-ready) .reveal-item{opacity:0}`}</style>
+        <style>{`html:not(.gsap-ready) .intro-char,html:not(.gsap-ready) .reveal-item,html:not(.gsap-ready) .hero-fade{opacity:0}`}</style>
         <noscript>
-          <style>{".intro-char,.reveal-item{opacity:1!important}"}</style>
+          <style>{`.intro-char,.reveal-item,.hero-fade{opacity:1!important}`}</style>
         </noscript>
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col">
+        <Providers>
+          <div className="relative flex min-h-screen flex-col">
             <SEO />
             <Navbar />
-            <main className="container mx-auto max-w-6xl pt-16 px-6 flex-grow">
+            <main className="mx-auto w-full max-w-6xl flex-grow px-5 pt-20 sm:px-6">
               {children}
             </main>
             <Footer />

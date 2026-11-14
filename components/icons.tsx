@@ -1,19 +1,33 @@
 import * as React from "react";
 import * as SiIcon from "react-icons/si";
-import { IconSvgProps, siIcon } from "@/types";
+import { FaCss3Alt, FaLinkedin } from "react-icons/fa";
 import { PiXLogoFill } from "react-icons/pi";
-import { FaLinkedin } from "react-icons/fa";
+
+import { IconSvgProps, siIcon } from "@/types";
+
+const iconOverrides: Partial<
+  Record<siIcon | "SiCss3" | "SiNextui", React.ComponentType<{ size?: number; color?: string }>>
+> = {
+  SiCss: FaCss3Alt,
+  SiCss3: FaCss3Alt,
+  SiNextui: SiIcon.SiHeroui,
+};
+
 export const SimpleIcon = ({
   iconName,
   size,
   color,
 }: {
-  iconName: siIcon;
+  iconName: siIcon | "SiCss3" | "SiNextui";
   size?: number;
   color?: string;
 }) => {
-  const IconComponent = SiIcon[iconName];
-  return IconComponent ? <IconComponent size={size} color={color} /> : null;
+  const IconComponent =
+    iconOverrides[iconName] || SiIcon[iconName as siIcon];
+
+  return IconComponent ? (
+    <IconComponent size={size} color={color || "currentColor"} />
+  ) : null;
 };
 
 export const Logo: React.FC<IconSvgProps> = ({

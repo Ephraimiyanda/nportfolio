@@ -1,180 +1,177 @@
-import {
-  Navbar as HeroUINavbar,
-  NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
-  NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
-} from "@heroui/navbar";
-import { Button } from "@heroui/button";
-import { Kbd } from "@heroui/kbd";
-import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
+"use client";
+
+import { useEffect, useState } from "react";
 import NextLink from "next/link";
-import clsx from "clsx";
-import { User } from "@heroui/user";
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  SearchIcon,
-  LinkedInIcon,
-} from "@/components/icons";
+import { Link } from "@heroui/link";
+import { Button } from "@heroui/button";
 import { GoArrowUpRight } from "react-icons/go";
 import { PiReadCvLogo } from "react-icons/pi";
 
+import { siteConfig } from "@/config/site";
+import {
+  TwitterIcon,
+  GithubIcon,
+  LinkedInIcon,
+} from "@/components/icons";
+
 export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <HeroUINavbar
-      isBlurred={false}
-      isBordered
-      className="fixed top-0 z-100 bg-background"
-      maxWidth="xl"
-    >
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <User
-              avatarProps={{
-                src: "/icon.png",
-              }}
-              classNames={{
-                name: "uppercase font-medium text-foreground",
-                description: "uppercase text-default-500",
-              }}
-              description="Frontend developer"
-              name="Ephraim Iyanda"
-            />
-          </NextLink>
-        </NavbarBrand>
-      </NavbarContent>
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="center">
-        <ul className="hidden md:flex gap-4 justify-start ml-2">
+    <header className="fixed inset-x-0 top-0 z-50 bg-[#000000]">
+      <div className="relative z-[60] mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-6">
+        <NextLink href="/" className="group flex min-w-0 items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black font-mono text-xs tracking-[0.12em] text-accent">
+            EI
+          </span>
+          <span className="min-w-0">
+            <span className="block truncate text-sm font-medium tracking-[0.04em] text-ink">
+              Ephraim Iyanda
+            </span>
+            <span className="block truncate font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
+              Frontend developer
+            </span>
+          </span>
+        </NextLink>
+
+        <nav className="hidden items-center gap-1 rounded-full border border-white/15 bg-black px-2 py-1.5 md:flex">
           {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium uppercase font-medium hover:text-white",
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
-          ))}
-        </ul>
-      </NavbarContent>
-
-      <NavbarContent className=" basis-1 pl-4" justify="end">
-        <NavbarItem className="sm:flex gap-2 hidden justify-center items-center">
-          <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-            <TwitterIcon className="text-foreground" />
-          </Link>
-          <Link
-            isExternal
-            aria-label="LinkedIn"
-            href={siteConfig.links.linkedIn}
-          >
-            <LinkedInIcon className="text-foreground" />
-          </Link>
-          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-            <GithubIcon className="text-foreground" />
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="flex justify-center items-center">
-          <ThemeSwitch />
-        </NavbarItem>
-        <NavbarMenuToggle className="md:hidden flex gap-2" />
-      </NavbarContent>
-
-      <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-4 mb-4 justify-center items-center text-center">
-          {siteConfig.navItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={"foreground"}
-                href="#"
-                size="lg"
-                className="uppercase font-medium text-2xl hover:text-white"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </div>
-        <NavbarMenuItem>
-          <div className="flex items-start gap-4 justify-center">
-            <Button
-              as={Link}
-              href="mailto:iyandaephraim@gmail.com"
-              endContent={<GoArrowUpRight size={24} />}
-              variant="bordered"
-              className="px-4 sm:px-6 rounded-full text-base sm:text-lg py-6 border-black/10 dark:border-white/15 border-[0.5px] dark:hover:shadow-white/40 hover:shadow-black/30 hover:shadow-sm ease-in-out transition-all duration-250"
+            <NextLink
+              key={item.href}
+              href={item.href}
+              className="rounded-full px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-mute transition hover:bg-white/5 hover:text-ink"
             >
-              Let’s talk
-            </Button>
-            <Button
-              as={Link}
-              endContent={<PiReadCvLogo size={24} />}
-              href={siteConfig.resume}
-              variant="bordered"
-              className="px-4 sm:px-6 rounded-full text-base sm:text-lg py-6 border-black/10 dark:border-white/15 border-[0.5px] dark:hover:shadow-white/40 hover:shadow-black/30 hover:shadow-sm ease-in-out transition-all duration-250"
-            >
-              Download Resume
-            </Button>
-          </div>
-        </NavbarMenuItem>
-        <NavbarItem className="flex flex-col gap-4">
-          <p className="py-2 text-default-500 text-xl text-center">
-            I&apos;m on social media
-          </p>
-          <div className="flex gap-4 justify-center">
+              {item.label}
+            </NextLink>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <div className="hidden items-center gap-3 sm:flex">
             <Link
               isExternal
               aria-label="Twitter"
               href={siteConfig.links.twitter}
+              className="icon-blend"
             >
-              <TwitterIcon className="text-default-500" />
+              <TwitterIcon className="text-current" />
             </Link>
             <Link
               isExternal
               aria-label="LinkedIn"
               href={siteConfig.links.linkedIn}
+              className="icon-blend"
             >
-              <LinkedInIcon className="text-default-500" />
+              <LinkedInIcon className="text-current" />
             </Link>
-            <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-              <GithubIcon className="text-default-500" />
+            <Link
+              isExternal
+              aria-label="Github"
+              href={siteConfig.links.github}
+              className="icon-blend"
+            >
+              <GithubIcon className="text-current" />
             </Link>
           </div>
-        </NavbarItem>
-      </NavbarMenu>
-    </HeroUINavbar>
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-label="Toggle menu"
+            className="flex h-10 items-center justify-center rounded-full border border-white/15 bg-black px-4 font-mono text-[11px] uppercase tracking-[0.14em] text-ink md:hidden"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
+      </div>
+
+      <div
+        className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-300 md:hidden ${
+          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={() => setOpen(false)}
+        aria-hidden={!open}
+      />
+
+      <div className="mobile-menu relative z-50 md:hidden" data-open={open}>
+        <div className="mobile-menu-inner">
+          <div className="mx-4 mb-4 overflow-hidden rounded-[28px] border border-white/15 bg-black px-5 py-6">
+            <div className="flex flex-col gap-1">
+              {siteConfig.navItems.map((item, index) => (
+                <NextLink
+                  key={item.href}
+                  href={item.href}
+                  className={`rounded-2xl px-3 py-3 font-mono text-sm uppercase tracking-[0.18em] text-ink transition duration-300 hover:bg-white/5 ${
+                    open
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-2 opacity-0"
+                  }`}
+                  style={{
+                    transitionDelay: open ? `${90 + index * 45}ms` : "0ms",
+                  }}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </NextLink>
+              ))}
+            </div>
+
+            <div className="mt-5 flex flex-col gap-3 border-t border-white/15 pt-5">
+              <Button
+                as={Link}
+                href="mailto:iyandaephraim@gmail.com"
+                endContent={<GoArrowUpRight size={20} />}
+                className="btn-glow h-12 rounded-full px-5 text-sm font-medium"
+              >
+                Let’s talk
+              </Button>
+              <Button
+                as={Link}
+                href={siteConfig.resume}
+                endContent={<PiReadCvLogo size={20} />}
+                className="h-12 rounded-full border border-white/15 bg-black px-5 text-sm text-ink"
+              >
+                Download Resume
+              </Button>
+            </div>
+
+            <div className="mt-5 flex justify-center gap-5">
+              <Link
+                isExternal
+                aria-label="Twitter"
+                href={siteConfig.links.twitter}
+                className="icon-blend"
+              >
+                <TwitterIcon className="text-current" />
+              </Link>
+              <Link
+                isExternal
+                aria-label="LinkedIn"
+                href={siteConfig.links.linkedIn}
+                className="icon-blend"
+              >
+                <LinkedInIcon className="text-current" />
+              </Link>
+              <Link
+                isExternal
+                aria-label="Github"
+                href={siteConfig.links.github}
+                className="icon-blend"
+              >
+                <GithubIcon className="text-current" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 };

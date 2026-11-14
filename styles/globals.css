@@ -2,60 +2,180 @@
 
 @config "../tailwind.config.js";
 
-.bg {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  width: 200%;
-  height: 200vh;
-  background: transparent
-    url("http://assets.iceable.com/img/noise-transparent.png") repeat 0 0;
-  background-repeat: repeat;
-  animation: bg-animation 0.2s infinite;
-  opacity: 0.9;
-  visibility: visible;
+:root {
+  --bg: #000000;
+  --bg-elevated: rgba(255, 255, 255, 0.03);
+  --bg-soft: rgba(255, 255, 255, 0.045);
+  --fg: #f5f5f0;
+  --muted: #a8a89e;
+  --faint: #6f6f68;
+  --line: rgba(255, 255, 255, 0.08);
+  --accent: #cae8bd;
+  --accent-soft: rgba(202, 232, 189, 0.14);
+  --accent-ink: #0a0a0a;
+  --glow: rgba(202, 232, 189, 0.45);
+  --shadow-soft:
+    0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 40px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-glow: 0 0 0 1px rgba(202, 232, 189, 0.12), 0 10px 40px rgba(202, 232, 189, 0.28);
 }
 
-/* Hidden only until GSAP takes over, so the entrance can run instead of staying at 0. */
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.font-display {
+  font-family: var(--font-geist-sans), sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.surface {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.045),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.btn-glow {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: none;
+  transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-glow:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
+.icon-blend {
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.icon-blend:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.reveal-item,
+.intro-char,
+.hero-fade {
+  will-change: transform, opacity;
+}
+
 html:not(.gsap-ready) .intro-char,
-html:not(.gsap-ready) .reveal-item {
+html:not(.gsap-ready) .reveal-item,
+html:not(.gsap-ready) .hero-fade {
   opacity: 0;
 }
 
-@keyframes bg-animation {
-  0% {
-    transform: translate(0, 0);
+.mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease;
+}
+
+.mobile-menu[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.mobile-menu-inner {
+  overflow: hidden;
+}
+
+.soft-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+@keyframes soft-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  10% {
-    transform: translate(-5%, -5%);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  20% {
-    transform: translate(-10%, 5%);
-  }
-  30% {
-    transform: translate(5%, -10%);
-  }
-  40% {
-    transform: translate(-5%, 15%);
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    transform: translate(-10%, 5%);
+    transform: translateY(-10px);
   }
-  60% {
-    transform: translate(15%, 0);
+}
+
+.detail-rise {
+  animation: soft-rise 0.45s ease;
+}
+
+.float-soft {
+  animation: float-soft 7s ease-in-out infinite;
+}
+
+.float-soft-delayed {
+  animation: float-soft 8.5s ease-in-out 1.2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  70% {
-    transform: translate(0, 10%);
+
+  html:not(.gsap-ready) .intro-char,
+  html:not(.gsap-ready) .reveal-item,
+  html:not(.gsap-ready) .hero-fade {
+    opacity: 1;
   }
-  80% {
-    transform: translate(-15%, 0);
-  }
-  90% {
-    transform: translate(10%, 5%);
-  }
-  100% {
-    transform: translate(5%, 0);
+
+  .icon-blend,
+  .detail-rise,
+  .float-soft,
+  .float-soft-delayed,
+  .mobile-menu,
+  .btn-glow {
+    transition: none;
+    animation: none !important;
   }
 }
