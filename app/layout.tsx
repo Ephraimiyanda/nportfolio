@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer";
 import SEO from "@/components/seo";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,
@@ -17,6 +18,27 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   icons: {
     icon: "/icon.png",
+  },
+  openGraph: {
+    title: "Ephraim Iyanda | Frontend Developer",
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Ephraim Iyanda — Frontend Developer portfolio",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ephraim Iyanda | Frontend Developer",
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
 };
 

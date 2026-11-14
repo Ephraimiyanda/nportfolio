@@ -27,6 +27,8 @@ export const siteConfig = {
   name: "Ephraim Iyanda | Portfolio",
   description:
     "Frontend developer crafting performant, visually stunning interfaces with React, Next.js, and thoughtful motion.",
+  url: "https://ephraimiyanda.vercel.app",
+  ogImage: "/og-image.png",
   navItems: [
     { label: "Work", href: "/#work" },
     { label: "Stack", href: "/#stack" },
