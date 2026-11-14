@@ -1,5 +1,9 @@
 import Head from "next/head";
 
+import { siteConfig } from "@/config/site";
+
+const ogImage = `${siteConfig.url}${siteConfig.ogImage}`;
+
 export default function SEO() {
   return (
     <Head>
@@ -22,8 +26,11 @@ export default function SEO() {
         property="og:description"
         content="Portfolio of Ephraim Iyanda — Frontend Developer focused on creating clean, interactive, and performant web interfaces."
       />
-      <meta property="og:image" content="/icon.png" />
-      <meta property="og:url" content="https://ephraimiyanda.vercel.app" />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Ephraim Iyanda — Frontend Developer portfolio" />
+      <meta property="og:url" content={siteConfig.url} />
       <meta property="og:type" content="website" />
 
       {/* Twitter */}
@@ -36,7 +43,7 @@ export default function SEO() {
         name="twitter:description"
         content="Frontend Developer crafting delightful, fast, and responsive web experiences."
       />
-      <meta name="twitter:image" content="/icon.png" />
+      <meta name="twitter:image" content={ogImage} />
 
       <link rel="icon" href="/icon.png" />
     </Head>
