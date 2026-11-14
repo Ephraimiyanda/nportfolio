@@ -211,10 +211,8 @@ export const siteConfig = {
       date: "Aug 2022 – Aug 2023",
     },
   ],
-  aboutImg:
-    "https://res.cloudinary.com/dg0kdnwt1/image/upload/v1761279203/bdfipp6dcuptjf5sjtrt.jpg",
-  profileImg:
-    "https://res.cloudinary.com/dg0kdnwt1/image/upload/w_1200,c_fill,ar_3:4,g_auto/v1761279205/yhqqskf40vrljvbdmifv.jpg",
+  aboutImg: "/ephraim-portrait.jpg",
+  profileImg: "/ephraim-portrait.jpg",
   meetingLink: "https://calendly.com/iyandaephraim/30min",
   resume:
     "https://drive.google.com/file/d/1gxzkmANXy2Zhi-V3liI2A_JZ3lKIgoKF/view",

@@ -201,81 +201,52 @@ export default function Home() {
     <div className="flex w-full flex-col gap-24 pb-20 pt-4 md:gap-28 md:pb-28 md:pt-8">
       <section
         ref={heroRef}
-        className="relative isolate min-h-[84vh] overflow-hidden"
+        className="relative flex min-h-[72vh] max-w-3xl flex-col justify-center pb-10 pt-16 md:min-h-[78vh] md:pb-16 md:pt-8"
       >
-        <div className="absolute inset-y-0 right-[-8%] -z-10 hidden w-[58%] md:block">
-          <Image
-            alt=""
-            aria-hidden
-            className="object-cover object-[center_20%] opacity-80"
-            fill
-            priority
-            sizes="58vw"
-            src={siteConfig.aboutImg}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[color:var(--bg)] via-[color:var(--bg)]/75 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg)] via-transparent to-[color:var(--bg)]/40" />
-        </div>
+        <p className="hero-fade mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+          Frontend developer · interfaces & motion
+        </p>
 
-        <div className="absolute inset-0 -z-20 md:hidden">
-          <Image
-            alt=""
-            aria-hidden
-            className="object-cover object-top opacity-45"
-            fill
-            priority
-            sizes="100vw"
-            src={siteConfig.aboutImg}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--bg)]/40 via-[color:var(--bg)]/75 to-[color:var(--bg)]" />
-        </div>
+        <h1 className="font-display text-[clamp(3.2rem,10vw,6.8rem)] font-medium leading-[0.9] tracking-[-0.03em] text-ink">
+          {brand.split(" ").map((word, wordIndex, words) => (
+            <span key={word} className="inline-block whitespace-nowrap">
+              {word.split("").map((char, charIndex) => (
+                <span
+                  key={`${word}-${charIndex}`}
+                  className="intro-char inline-block"
+                >
+                  {char}
+                </span>
+              ))}
+              {wordIndex < words.length - 1 ? "\u00A0" : null}
+            </span>
+          ))}
+        </h1>
 
-        <div className="relative z-10 flex min-h-[84vh] max-w-3xl flex-col justify-end pb-10 pt-16 md:justify-center md:pb-16 md:pt-8">
-          <p className="hero-fade mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-            Frontend developer · interfaces & motion
-          </p>
+        <p className="hero-fade mt-6 max-w-xl text-lg leading-relaxed text-mute sm:text-xl">
+          I build{" "}
+          <span className="font-medium text-ink">performant</span>,{" "}
+          <span className="font-medium text-ink">visually sharp</span> web
+          experiences — driven by clean UI and thoughtful animation.
+        </p>
 
-          <h1 className="font-display text-[clamp(3.2rem,10vw,6.8rem)] font-medium leading-[0.9] tracking-[-0.03em] text-ink">
-            {brand.split(" ").map((word, wordIndex, words) => (
-              <span key={word} className="inline-block whitespace-nowrap">
-                {word.split("").map((char, charIndex) => (
-                  <span
-                    key={`${word}-${charIndex}`}
-                    className="intro-char inline-block"
-                  >
-                    {char}
-                  </span>
-                ))}
-                {wordIndex < words.length - 1 ? "\u00A0" : null}
-              </span>
-            ))}
-          </h1>
-
-          <p className="hero-fade mt-6 max-w-xl text-lg leading-relaxed text-mute sm:text-xl">
-            I build{" "}
-            <span className="font-medium text-ink">performant</span>,{" "}
-            <span className="font-medium text-ink">visually sharp</span> web
-            experiences — driven by clean UI and thoughtful animation.
-          </p>
-
-          <div className="hero-fade mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/#work"
-              className="inline-flex items-center gap-2 bg-accent px-5 py-3 text-sm font-medium text-accent-ink shadow-accent transition hover:brightness-110"
-            >
-              View work
-              <GoArrowUpRight size={18} />
-            </Link>
-            <Link
-              href={siteConfig.resume}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 border border-[color:var(--line)] px-5 py-3 text-sm text-ink transition hover:border-accent/40 hover:text-accent"
-            >
-              <PiReadCvLogo size={18} />
-              Resume
-            </Link>
-          </div>
+        <div className="hero-fade mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/#work"
+            className="inline-flex items-center gap-2 bg-accent px-5 py-3 text-sm font-medium text-accent-ink shadow-accent transition hover:brightness-110"
+          >
+            View work
+            <GoArrowUpRight size={18} />
+          </Link>
+          <Link
+            href={siteConfig.resume}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 border border-[color:var(--line)] px-5 py-3 text-sm text-ink transition hover:border-accent/40 hover:text-accent"
+          >
+            <PiReadCvLogo size={18} />
+            Resume
+          </Link>
         </div>
       </section>
 
@@ -336,13 +307,14 @@ export default function Home() {
           ref={storyRef}
           className="grid items-start gap-10 md:grid-cols-[0.75fr_1.25fr]"
         >
-          <div className="reveal-item relative aspect-[3/4] max-w-xs overflow-hidden border border-[color:var(--line)] md:max-w-none">
+          <div className="reveal-item relative aspect-[3/4] w-full max-w-[280px] overflow-hidden border border-[color:var(--line)] md:max-w-none">
             <Image
               alt="Portrait of Ephraim Iyanda"
-              className="object-cover"
+              className="object-cover object-[center_20%]"
               fill
-              sizes="(max-width: 768px) 70vw, 28vw"
-              src={siteConfig.profileImg}
+              priority
+              sizes="(max-width: 768px) 280px, 32vw"
+              src={siteConfig.aboutImg}
             />
           </div>
           <div className="flex flex-col gap-6">
