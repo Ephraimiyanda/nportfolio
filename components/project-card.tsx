@@ -18,7 +18,7 @@ export function ProjectCard({
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className={`reveal-item glass group flex h-full flex-col gap-4 rounded-2xl border-0 p-3 transition duration-300 sm:p-3.5 ${className}`}
+      className={`reveal-item glass-soft group flex h-full flex-col gap-4 rounded-2xl p-3 transition duration-300 sm:p-3.5 ${className}`}
     >
       <div className="relative h-[220px] overflow-hidden rounded-xl bg-soft sm:h-[240px] lg:h-[260px]">
         <Image
