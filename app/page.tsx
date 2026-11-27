@@ -271,7 +271,7 @@ export default function Home() {
               href={siteConfig.resume}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink shadow-soft transition hover:border-accent/35 hover:text-accent"
+              className="btn-glass inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm text-ink"
             >
               <PiReadCvLogo size={18} />
               Resume
@@ -280,7 +280,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 h-[360px] w-full sm:h-[380px] md:h-[400px]">
-          <div className="hero-panel float-soft surface absolute left-0 top-2 w-[88%] rounded-[28px] border-white/25 p-5 sm:w-[80%] md:-left-4 md:top-8 md:w-[78%]">
+          <div className="hero-panel float-soft surface absolute left-0 top-2 w-[88%] rounded-[28px] p-5 sm:w-[80%] md:-left-4 md:top-8 md:w-[78%]">
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
               Currently building
             </p>
@@ -293,7 +293,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="hero-panel float-soft-delayed surface absolute right-0 top-[11.5rem] w-[90%] rounded-[28px] border-white/25 p-5 sm:w-[84%] md:top-[12.5rem]">
+          <div className="hero-panel float-soft-delayed surface absolute right-0 top-[11.5rem] w-[90%] rounded-[28px] p-5 sm:w-[84%] md:top-[12.5rem]">
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
               Focus
             </p>
@@ -404,7 +404,7 @@ export default function Home() {
                 href={siteConfig.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink transition hover:border-accent/35 hover:text-accent"
+                className="btn-glass inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm text-ink"
               >
                 <PiReadCvLogo size={18} />
                 Download resume

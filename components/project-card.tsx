@@ -18,7 +18,7 @@ export function ProjectCard({
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className={`reveal-item group flex h-full flex-col gap-4 ${className}`}
+      className={`reveal-item glass group flex h-full flex-col gap-4 rounded-2xl p-3 transition duration-300 hover:border-accent/30 sm:p-3.5 ${className}`}
     >
       <div className="relative h-[220px] overflow-hidden rounded-xl bg-soft sm:h-[240px] lg:h-[260px]">
         <Image
@@ -31,7 +31,7 @@ export function ProjectCard({
         />
       </div>
 
-      <div className="flex flex-1 flex-col gap-3">
+      <div className="flex flex-1 flex-col gap-3 px-0.5 pb-1">
         <div className="flex items-baseline justify-between gap-3 text-sm">
           <h3 className="min-w-0 truncate font-medium tracking-tight text-ink">
             {project.name}
@@ -44,7 +44,7 @@ export function ProjectCard({
           {project.summary}
         </p>
 
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-1 text-sm text-ink transition group-hover:text-accent">
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-1 text-sm font-medium text-accent transition group-hover:brightness-110">
           View project
           <GoArrowUpRight size={14} />
         </span>

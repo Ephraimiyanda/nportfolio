@@ -23,7 +23,7 @@ export function ContactForm() {
           href={siteConfig.meetingLink}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink shadow-soft transition hover:border-accent/35 hover:text-accent"
+          className="btn-glass inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm text-ink"
         >
           <IoCalendarOutline size={18} />
           Book a call
