@@ -280,7 +280,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 h-[360px] w-full sm:h-[380px] md:h-[400px]">
-          <div className="hero-panel float-soft surface absolute left-0 top-2 w-[88%] rounded-[28px] p-5 sm:w-[80%] md:-left-4 md:top-8 md:w-[78%]">
+          <div className="hero-panel float-soft surface absolute left-0 top-2 w-[88%] rounded-[28px] border-white/25 p-5 sm:w-[80%] md:-left-4 md:top-8 md:w-[78%]">
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
               Currently building
             </p>
@@ -293,7 +293,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="hero-panel float-soft-delayed surface absolute right-0 top-[11.5rem] w-[90%] rounded-[28px] p-5 sm:w-[84%] md:top-[12.5rem]">
+          <div className="hero-panel float-soft-delayed surface absolute right-0 top-[11.5rem] w-[90%] rounded-[28px] border-white/25 p-5 sm:w-[84%] md:top-[12.5rem]">
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
               Focus
             </p>
@@ -320,7 +320,7 @@ export default function Home() {
           title="Projects with room to breathe."
           copy="Open a card to read the brief, stack, and highlights — then jump to the live build if you want."
         />
-        <div className="columns-1 gap-x-6 sm:columns-2 sm:gap-x-8">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-14">
           {siteConfig.projects.map((project, index) => (
             <ProjectCard
               key={project.slug}
