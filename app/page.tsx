@@ -271,7 +271,7 @@ export default function Home() {
               href={siteConfig.resume}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[color:var(--line)] bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink shadow-soft transition hover:border-accent/35 hover:text-accent"
+              className="btn-glass inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm text-ink"
             >
               <PiReadCvLogo size={18} />
               Resume
@@ -320,7 +320,7 @@ export default function Home() {
           title="Projects with room to breathe."
           copy="Open a card to read the brief, stack, and highlights — then jump to the live build if you want."
         />
-        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-14">
           {siteConfig.projects.map((project, index) => (
             <ProjectCard
               key={project.slug}
@@ -404,7 +404,7 @@ export default function Home() {
                 href={siteConfig.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[color:var(--bg-soft)] px-5 py-3 text-sm text-ink transition hover:border-accent/35 hover:text-accent"
+                className="btn-glass inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm text-ink"
               >
                 <PiReadCvLogo size={18} />
                 Download resume

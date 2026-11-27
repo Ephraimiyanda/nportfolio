@@ -137,7 +137,7 @@ export const Navbar = () => {
                 as={Link}
                 href={siteConfig.resume}
                 endContent={<PiReadCvLogo size={20} />}
-                className="h-12 rounded-full border border-white/15 bg-black px-5 text-sm text-ink"
+                className="btn-glass h-12 rounded-full px-5 text-sm text-ink"
               >
                 Download Resume
               </Button>
