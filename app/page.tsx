@@ -320,7 +320,7 @@ export default function Home() {
           title="Projects with room to breathe."
           copy="Open a card to read the brief, stack, and highlights — then jump to the live build if you want."
         />
-        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="columns-1 gap-x-6 sm:columns-2 sm:gap-x-8">
           {siteConfig.projects.map((project, index) => (
             <ProjectCard
               key={project.slug}
